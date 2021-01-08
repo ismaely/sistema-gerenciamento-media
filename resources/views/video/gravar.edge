@@ -1,0 +1,206 @@
+@layout('layouts/dasboard')
+
+@section('master')
+
+<div class="row">
+  @if(flashMessages.has('msg'))
+  <div class="col-md-12">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <b>{{ flashMessages.get('msg') }}</b>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <i class="ik ik-x"></i>
+  </button>
+    </div>
+  </div>
+  @endif
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="col-md-5">
+                    <video id="gum"  playsinline autoplay muted></video>
+                    <video id="recorded" playsinline loop></video>
+                   
+                </div>
+               
+            </div>
+            <div class="p-4 border-top mt-2">
+                <div class="row text-center">
+                    <div class="col-sm-4">
+                        <button id="start" class="btn btn-primary">Ligar a camera</button>
+                    </div>
+
+                    <div class="col-sm-4 ">
+                      <button id="record" class="btn btn-info" disabled>Gravar</button>
+                  </div>
+                    <div class="col-sm-4">
+                       <!-- <button id="play"  class="btn btn-danger" disabled>Play</button>-->
+                        <button id="download" class="btn  btn-success" data-toggle="modal" data-target="#exampleModalCenter" disabled>Salvar</button> 
+
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterLabel">Titulo do Video</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="forms-sample" action="{{ route('VideosController.salvarVideo') }}" method="POST" enctype="multipart/form-data">
+          <div class="modal-body">
+            <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo" required>
+            
+          </div>
+          <!--
+          <div style="display:none">
+            <input type="file" class="form-control" id="video" name="video" >
+          </div>
+        -->
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            
+              <button type="submit" id="enviar" class="btn btn-primary" >Enviar</button>
+             
+          </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+
+<script>
+
+let mediaRecorder;
+let recordedBlobs;
+
+const errorMsgElement = document.querySelector('span#errorMsg');
+//const recordedVideo = document.querySelector('video#recorded');
+const recordButton = document.querySelector('button#record');
+//const playButton = document.querySelector('button#play');
+const downloadButton = document.querySelector('button#download');
+
+const enviarButton = document.querySelector('button#enviar');
+
+
+
+document.querySelector('button#start').addEventListener('click', async () => {
+  const constraints = {
+    audio: true,
+    video: {
+      facingMode: "user",
+            width: {min: 640, ideal: 1000, max: 1220},
+            height: {min: 480, ideal: 500, max: 1080}
+    }
+  };
+  await init(constraints);
+});
+
+
+async function init(constraints) {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    handleSuccess(stream);
+  } catch (e) {
+    console.error('navigator.getUserMedia error:', e);
+    //errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+  }
+}
+
+function handleSuccess(stream) {
+  recordButton.disabled = false;
+  window.stream = stream;
+
+  const gumVideo = document.querySelector('video#gum');
+  gumVideo.srcObject = stream;
+}
+
+recordButton.addEventListener('click', () => {
+  if (recordButton.textContent === 'Gravar') {
+    startRecording();
+  } else {
+    stopRecording();
+    recordButton.textContent = 'Gravar';
+    //playButton.disabled = false;
+    downloadButton.disabled = false;
+  }
+});
+
+
+function startRecording() {
+  recordedBlobs = [];
+  let options = {mimeType: 'video/webm;codecs=vp9,opus'};
+  try {
+    mediaRecorder = new MediaRecorder(window.stream, options);
+  } catch (e) {
+    console.error('Exception while creating MediaRecorder:', e);
+    errorMsgElement.innerHTML = `Exception while creating MediaRecorder: ${JSON.stringify(e)}`;
+    return;
+  }
+
+  recordButton.textContent = 'Stop Gravação';
+  //playButton.disabled = true;
+  downloadButton.disabled = true;
+  mediaRecorder.onstop = (event) => {
+    //console.log('Recorder stopped: ', event);
+  };
+  mediaRecorder.ondataavailable = handleDataAvailable;
+  mediaRecorder.start();
+}
+
+function handleDataAvailable(event) {
+  if (event.data && event.data.size > 0) {
+    recordedBlobs.push(event.data);
+  }
+}
+
+function stopRecording() {
+  mediaRecorder.stop();
+}
+
+/**
+playButton.addEventListener('click', () => {
+  const superBuffer = new Blob(recordedBlobs, {type: 'video/webm'});
+  recordedVideo.src = null;
+  recordedVideo.srcObject = null;
+  recordedVideo.src = window.URL.createObjectURL(superBuffer);
+  recordedVideo.controls = true;
+  recordedVideo.play();
+});
+*/
+
+downloadButton.addEventListener('click', () => {
+  const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
+  //const url = window.URL.createObjectURL(blob);
+});
+
+enviarButton.addEventListener('click', () => {
+  const date = new Date;
+  const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
+  const formData = new FormData();
+  const xhr = new XMLHttpRequest();
+
+  const name = $('#titulo').val();
+  const titulo = name+'-'+date.toISOString().substr(0,10)+'-'+date.toTimeString().substr(0,8)+'.mp4';
+
+  const fileVideo = new File([blob], titulo, {type: 'video/mp4'});
+
+  formData.append('video-blob', fileVideo);
+  formData.append('video-filename', fileVideo.name);
+  formData.append('titulo', name);
+  formData.append('upload', 'true');
+
+  
+  xhr.open('POST', '/salvar/video');
+  xhr.send(formData);
+
+});
+</script>
+
+
+@endsection

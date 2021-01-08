@@ -1,0 +1,294 @@
+@layout('layouts/dasboard')
+
+@section('master')
+
+<!--
+<div class="card">
+    <div class="card-header row">
+        <div class="col col-sm-3">
+           
+        </div>
+        <div class="col col-sm-6">
+            <div class="card-search with-adv-search dropdown">
+                <form action="">
+                    <input type="text" class="form-control global_filter" id="global_filter" placeholder="Search.." required>
+                    <button type="submit" class="btn btn-icon"><i class="ik ik-search"></i></button>
+                    <button type="button" id="adv_wrap_toggler" class="adv-btn ik ik-chevron-down dropdown-toggle" data-toggle="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                   
+                </form>
+            </div>
+        </div>
+        <div class="col col-sm-3">
+            <div class="card-options text-right">
+                <span class="mr-5" id="top">1 - 50 of 2,500</span>
+                <a href="#"><i class="ik ik-chevron-left"></i></a>
+                <a href="#"><i class="ik ik-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Company</th>
+                        <th>Lead Score</th>
+                        <th>Date</th>
+                        <th>Tags</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="d-inline-block align-middle">
+                                <img src="../img/users/4.jpg" alt="user image" class="rounded-circle img-40 align-top mr-15">
+                                <div class="d-inline-block">
+                                    <h6>Shirley  Hoe</h6>
+                                    <p class="text-muted mb-0">Sales executive , NY</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>Pinterest</td>
+                        <td>223</td>
+                        <td>19-11-2018</td>
+                        <td>
+                            <label class="badge badge-primary">Sketch</label>
+                            <label class="badge badge-primary">Ui</label>
+                        </td>
+                        <td><a href="#!"><i class="ik ik-edit f-16 mr-15 text-green"></i></a><a href="#!"><i class="ik ik-trash-2 f-16 text-red"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="d-inline-block align-middle">
+                                <img src="../img/users/2.jpg" alt="user image" class="rounded-circle img-40 align-top mr-15">
+                                <div class="d-inline-block">
+                                    <h6>James Alexander</h6>
+                                    <p class="text-muted mb-0">Sales executive , EL</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>Facebook</td>
+                        <td>268</td>
+                        <td>19-11-2018</td>
+                        <td>
+                            <label class="badge badge-primary">Ux</label>
+                            <label class="badge badge-danger">Ui</label>
+                        </td>
+                        <td><a href="#!"><i class="ik ik-edit f-16 mr-15 text-green"></i></a><a href="#!"><i class="ik ik-trash-2 f-16 text-red"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="d-inline-block align-middle">
+                                <img src="../img/users/4.jpg" alt="user image" class="rounded-circle img-40 align-top mr-15">
+                                <div class="d-inline-block">
+                                    <h6>Shirley  Hoe</h6>
+                                    <p class="text-muted mb-0">Sales executive , NY</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>Twitter</td>
+                        <td>293</td>
+                        <td>16-03-2018</td>
+                        <td>
+                            <label class="badge badge-primary">Ui</label>
+                        </td>
+                        <td><a href="#!"><i class="ik ik-edit f-16 mr-15 text-green"></i></a><a href="#!"><i class="ik ik-trash-2 f-16 text-red"></i></a></td>
+                    </tr>
+                   
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+-->
+
+
+<div class="row">
+    @if(flashMessages.has('msg'))
+  <div class="col-md-12">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <b>{{ flashMessages.get('msg') }}</b>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="ik ik-x"></i>
+    </button>
+    </div>
+  </div>
+  @endif
+    <div class="col-md-12">
+        <div class="mb-2 clearfix">
+            <a class="btn pt-0 pl-0 d-md-none d-lg-none" data-toggle="collapse" href="#displayOptions" role="button" aria-expanded="true" aria-controls="displayOptions">
+                Display Options
+                <i class="ik ik-chevron-down align-middle"></i>
+            </a>
+            <div class="collapse d-md-block display-options" id="displayOptions">
+                <span class="mr-3 d-inline-block float-md-left dispaly-option-buttons">
+                    <a href="#" class="mr-1 view-list active">
+                        <i class="ik ik-menu view-icon"></i>
+                    </a>
+                    <a href="#" class="mr-1 view-thumb">
+                        <i class="ik ik-list view-icon"></i>
+                    </a>
+                    <a href="#" class="mr-1 view-grid">
+                        <i class="ik ik-grid view-icon"></i>
+                    </a>
+                </span>
+                <div class="d-block d-md-inline-block">
+                    <div class="btn-group float-md-left mr-1 mb-1">
+                        <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Ordenar Por
+                            <i class="ik ik-chevron-down mr-0 align-middle"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Nome</a>
+                            <a class="dropdown-item" href="#">Titulo</a>
+                            <a class="dropdown-item" href="#">Data</a>
+                        </div>
+                    </div>
+                    <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
+                        <form action="">
+                            <input type="text" class="form-control" placeholder="Search.." required>
+                            <button type="submit" class="btn btn-icon"><i class="ik ik-search"></i></button>
+                           
+                        </form>
+                    </div>
+                </div>
+                <div class="float-md-right">
+                    <span class="text-muted text-small mr-2">Listar 1-10 de 210 items </span>
+                    <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        20
+                        <i class="ik ik-chevron-down mr-0 align-middle"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">10</a>
+                        <a class="dropdown-item" href="#">20</a>
+                        <a class="dropdown-item" href="#">30</a>
+                        <a class="dropdown-item" href="#">50</a>
+                        <a class="dropdown-item" href="#">100</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="separator mb-20"></div>
+        @each(midia in arrayItem)
+
+        <div class="modal fade edit-layout-modal" id="editLayoutItem" tabindex="-1" role="dialog" aria-labelledby="editLayoutItemLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editLayoutItemLabel">Titulo: {{ midia.titulo }}<b> </b></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="lead"></p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <video controls class="col-md-12">
+                                    <source src="../uploads/{{midia.nome}}"  type="video/mp4">
+                                </video>
+                                
+                                <!--<img src="../img/portfolio-1.jpg" class="img-fluid" alt="">-->
+                            </div>
+                        </div>
+                        <!--
+                        <div class="jumbotron pt-30 pb-30 mt-30">
+                            <h2 class="mt-0"></h2>
+                            <p class="lead"></p>
+                        </div>
+                    -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a data-toggle="modal" data-target="#exampleModalCenter" data-dismiss="modal" class="btn btn-primary">Editar</a>
+                        <!--<button type="button" class="btn btn-danger list-delete">Delete</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row layout-wrap" id="layout-wrap">
+            <div class="col-12 list-item">
+                <div class="card d-flex flex-row mb-3">
+                    <a class="d-flex card-img" href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem">
+                        <img src="../img/portfolio-1.jpg" alt="Donec sit amet est at sem iaculis aliquam." class="list-thumbnail responsive border-0">
+                        <span class="badge badge-pill badge-primary position-absolute badge-top-left">New</span>
+                        <span class="badge badge-pill badge-secondary position-absolute badge-top-left-2">Trending</span>
+                    </a>
+                    <div class="d-flex flex-grow-1 min-width-zero card-content">
+                        <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                            <a class="list-item-heading mb-1 truncate w-40 w-xs-100" href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem">
+                                {{ midia.titulo }}
+                            </a>
+                            <p class="mb-1 text-muted text-small category w-15 w-xs-100"> </p>
+                            <p class="mb-1 text-muted text-small date w-15 w-xs-100"> {{ midia.createdAt }}</p>
+                            <!--
+                            <div class="w-15 w-xs-100">
+                                <span class="badge badge-pill badge-secondary">On Hold</span>
+                            </div>
+                           -->
+                           <div class="w-15 w-xs-100">
+                            <span class="badge badge-pill badge-secondary"></span>
+                        </div>
+                        </div>
+                        <div class="list-actions">
+                            <a href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem"><i class="ik ik-eye"></i></a>
+                            <a data-toggle="modal" data-target="#exampleModalCenter" data-dismiss="modal"q><i class="ik ik-edit-2"></i></a>
+                            <!--<a href="#" class="list-delete"><i class="ik ik-trash-2"></i></a>-->
+                        </div>
+                        <div class="custom-control custom-checkbox pl-1 align-self-center">
+                            <label class="custom-control custom-checkbox mb-0">
+                                <input type="checkbox" class="custom-control-input">
+                                <span class="custom-control-label"></span>
+                            </label>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+<!-- visualização do video -->
+
+
+        
+
+        <!-- Editar o titulo -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterLabel">Editar o titulo do Video: {{ midia.titulo }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <form class="forms-sample" action="{{ route('VideosController.editarVideo') }}" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                      <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo" required>
+                      
+                    </div>
+                    
+                    <div style="display:none">
+                    <input type="text" class="form-control" id="nome" name="nome"  value="{{ midia.nome }}">
+                    <input type="text" class="form-control" id="idVideo" name="idVideo" value={{ midia.id }}>
+                    </div>
+                  
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                      
+                        <button type="submit" id="enviar" class="btn btn-primary" >Enviar</button>
+                       
+                    </div>
+                    </form>
+                </div>
+            </div>
+          </div>
+          
+        
+        @endeach
+    </div>
+</div>
+
+
+@endsection
