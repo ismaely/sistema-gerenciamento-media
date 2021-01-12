@@ -1,0 +1,69 @@
+@layout('layouts/dasboard')
+
+@section('master')
+
+<div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-7">
+        @if(flashMessages.has('msg'))
+        <div class="card-body">
+            <div class="alert bg-success alert-success text-white alert-dismissible fade show" role="alert">
+            <b>{{ flashMessages.get('msg') }}</b>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ik ik-x"></i>
+        </button>
+            </div>
+        </div>
+            @endif
+
+        <div class="card">
+            
+            <div class="card-header"><h3>Criar conta de utilizador</h3></div>
+            <div class="card-body">
+                <form class="forms-sample" action="{{ route('UsersController.registarConta') }}" method="POST">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Username<span class="form-txt-danger">*</span>:</label>
+                        <input type="text" name="nome" value="{{ flashMessages.get('nome') || '' }}" class="form-control" id="exampleInputName1" placeholder="cipre.cipre">
+                        <span class="text-danger">{{ flashMessages.get('errors.nome') || '' }}</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail3">Telefone<span class="form-txt-danger">*</span>:</label>
+                                <input type="text" name="telefone"  value="{{ flashMessages.get('telefone') || '' }}" class="form-control" name="telefone" " placeholder="Telefone">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleSelectGender">Genero</label>
+                                <select class="form-control" id="exampleSelectGender" name="genero">
+                                    <option value="Mssculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">E-mail<span class="form-txt-danger">*</span>:</label>
+                        <input type="email" name="email" value="{{ flashMessages.get('email') || '' }}"  class="form-control"  placeholder="cipre@cipre.com" required>
+                        <span class="text-danger">{{ flashMessages.get('errors.email') || '' }}</span>
+                       
+                    </div>
+
+                    <!--
+                    <div class="form-group">
+                        <label for="exampleInputPassword4">Password<span class="form-txt-danger">*</span>:</label>
+                        <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
+                    </div>
+                -->
+                   
+                    <button type="submit" class="btn btn-primary mr-2">SALVAR</button>
+                    <button class="btn btn-light">CANCELAR</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection

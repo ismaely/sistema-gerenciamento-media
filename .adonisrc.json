@@ -22,7 +22,8 @@
     "@adonisjs/core",
     "@adonisjs/session",
     "@adonisjs/view",
-    "@adonisjs/lucid"
+    "@adonisjs/lucid",
+    "@adonisjs/auth"
   ],
   "metaFiles": [
     ".env",
@@ -39,7 +40,6 @@
       "pattern": "tmp/**",
       "reloadServer": false
     }
-    
   ],
   "aceProviders": [
     "@adonisjs/repl"

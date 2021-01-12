@@ -35,8 +35,6 @@ Route.post('/salvar/video', 'VideosController.salvarVideo')
 Route.post('/editar/video', 'VideosController.editarVideo')
 
 
-
-
 //utilizador
-Route.get('/criar-conta', 'UtilizadorsController.criarConta')
-
+Route.get('/criar-conta', 'UsersController.criarConta')
+Route.post('/criar-conta', 'UsersController.registarConta')

@@ -12,16 +12,16 @@ export default class LoginController {
     }
 
     public async login({request, response, view }: HttpContextContract) {
- 
+      
         return view.render('home/index')
     }
 
     /**
      * logaut
      */
-    public async logout({response, view}: HttpContextContract ) {
-
-        response.redirect().toRoute('LoginController.index')
+    public async logout({ auth, response, session}: HttpContextContract ) {
+        await auth.logout()
+        return response.redirect().toRoute('LoginController.index')
         
     }
 }

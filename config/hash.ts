@@ -7,6 +7,7 @@
 
 import Env from '@ioc:Adonis/Core/Env'
 import { HashConfig } from '@ioc:Adonis/Core/Hash'
+import argon from '@phc/argon2'
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,7 @@ const hashConfig: HashConfig = {
   | free to change the default value
   |
   */
-  default: Env.get('HASH_DRIVER', 'argon'),
+  default: Env.get('HASH_DRIVER', 'bcrypt'),
 
   list: {
     /*

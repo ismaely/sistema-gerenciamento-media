@@ -23,14 +23,17 @@
     "youch-terminal": "^1.0.1"
   },
   "dependencies": {
+    "@adonisjs/auth": "^5.1.1",
     "@adonisjs/core": "^5.0.4-preview-rc-2.1",
     "@adonisjs/lucid": "^10.0.0",
     "@adonisjs/repl": "^1.1.6",
     "@adonisjs/session": "^4.0.6",
     "@adonisjs/view": "^3.1.0",
+    "@phc/argon2": "^1.0.9",
     "luxon": "^1.25.0",
     "mysql": "^2.18.1",
     "pg": "^8.5.1",
+    "phc-bcrypt": "^1.0.4",
     "proxy-addr": "^2.0.6",
     "recordrtc": "^5.6.1",
     "reflect-metadata": "^0.1.13",
