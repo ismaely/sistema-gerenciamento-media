@@ -22,14 +22,18 @@ import Route from '@ioc:Adonis/Core/Route'
 
 //login and logout
 Route.get('/', 'LoginController.index')
-Route.get('/login', 'LoginController.index')
-Route.get('/login/home', 'LoginController.login')
-Route.post('/login/home', 'LoginController.login')
-Route.get('/logout/user', 'LoginController.logout')
+Route.get('/login', 'LoginController.login')
+Route.post('/login', 'LoginController.login')
+
+//Home
+Route.group(() => {
+    Route.get('/home', 'HomeController.home')
+    Route.get('/logout/user', 'LoginController.logout')
+}).middleware('auth')
 
 
 //videos
-Route.get('/listar/video', 'VideosController.listarVideo')
+Route.get('/listar/video', 'VideosController.listarVideo').middleware('guest')
 Route.get('/gravar/video', 'VideosController.gravarVideo')
 Route.post('/salvar/video', 'VideosController.salvarVideo')
 Route.post('/editar/video', 'VideosController.editarVideo')
