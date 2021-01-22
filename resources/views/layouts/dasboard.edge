@@ -95,7 +95,7 @@
             <div class="page-wrap">
                 <div class="app-sidebar colored">
                     <div class="sidebar-header">
-                        <a class="header-brand" href="index.html">
+                        <a class="header-brand" href="{{ route('HomeController.home') }}">
                             <div class="logo-img">
                                <img src="../img/brand-white.svg" class="header-brand-img" alt="lavalite"> 
                             </div>
@@ -110,13 +110,14 @@
                             <nav id="main-menu-navigation" class="navigation-main">
                                 <div class="nav-lavel">Menu</div>
                                 <div class="nav-item active">
-                                    <a href="{{ route('LoginController.login') }}"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
+                                    <a href="{{ route('HomeController.home') }}"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
                                 </div>
                               
                                
                                 <div class="nav-item has-sub">
                                     <a href="#"><i class="ik ik-box"></i><span>Mídia</span></a>
                                     <div class="submenu-content">
+                                        <a href="{{ route('PlacasController.registarPalca') }}" class="menu-item">Registar Placa</a>
                                         <a href="{{ route('VideosController.gravarVideo') }}" class="menu-item">Gravar Videos</a>
                                         <a href="{{ route('VideosController.listarVideo') }}" class="menu-item">Listar Videos</a>
                                     </div>
@@ -125,8 +126,6 @@
                                     <a href="#"><i class="ik ik-triangle"></i><span>Advance</span> </a>
                                     <div class="submenu-content">
                                         <a href="pages/ui/modals.html" class="menu-item">Modals</a>
-                                        <a href="pages/ui/notifications.html" class="menu-item">Notifications</a>
-                                        <a href="pages/ui/carousel.html" class="menu-item">Slider</a>
                                         <a href="pages/ui/range-slider.html" class="menu-item">Range Slider</a>
                                         <a href="pages/ui/rating.html" class="menu-item">Rating</a>
                                     </div>
@@ -170,7 +169,7 @@
                 <footer class="footer">
                     <div class="w-100 clearfix">
                         <span class="text-center text-sm-left d-md-inline-block">Copyright © 2020 v1.0 Todos Direitos Reservados.</span>
-                        <span class="float-none float-sm-right mt-1 mt-sm-0 text-center">Cipre<i class="fa fa-heart text-danger"></i> Multimedia</a></span>
+                        <span class="float-none float-sm-right mt-1 mt-sm-0 text-center">CIPRA<i class="fa fa-heart text-danger"></i> Multimedia</a></span>
                     </div>
                 </footer>
                 

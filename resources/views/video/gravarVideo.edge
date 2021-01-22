@@ -1,4 +1,4 @@
-@layout('layouts/dasboard')
+ @layout('layouts/dasboard')
 
 @section('master')
 
@@ -160,7 +160,9 @@ function handleDataAvailable(event) {
 }
 
 function stopRecording() {
+  console.log(mediaRecorder.resume());
   mediaRecorder.stop();
+ 
 }
 
 /**
@@ -198,6 +200,8 @@ enviarButton.addEventListener('click', () => {
   
   xhr.open('POST', '/salvar/video');
   xhr.send(formData);
+  //xhr.onload = function(){ console.log(this.response); };
+  
 
 });
 </script>

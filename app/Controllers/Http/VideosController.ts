@@ -19,7 +19,7 @@ export default class VideosController {
      * async gravarVideo
      */
     public async gravarVideo({view}: HttpContextContract) {
-        return view.render('video/gravar')
+        return view.render('video/gravarVideo')
     }
 
 

@@ -1,0 +1,55 @@
+@layout('layouts/dasboard')
+
+@section('master')
+
+<div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-7">
+        @if(flashMessages.has('msg'))
+        <div class="card-body">
+            <div class="alert bg-success alert-success text-white alert-dismissible fade show" role="alert">
+            <b>{{ flashMessages.get('msg') }}</b>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ik ik-x"></i>
+        </button>
+            </div>
+        </div>
+            @endif
+
+        <div class="card">
+            
+            <div class="card-header"><h3>Registar Placa HDMI </h3></div>
+            <div class="card-body">
+                <form class="forms-sample" action="{{ route('UsersController.registarConta') }}" method="POST">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Nome<span class="form-txt-danger">*</span>:</label>
+                        <input type="text" name="nome" value="{{ flashMessages.get('nome') || '' }}" class="form-control" id="exampleInputName1" placeholder="">
+                        <span class="text-danger">{{ flashMessages.get('errors.nome') || '' }}</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="exampleInputEmail3">Mac<span class="form-txt-danger">*</span>:</label>
+                                <input type="text" name="mac"  value="{{ flashMessages.get('mac') || '' }}" class="form-control"  " placeholder="">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Numero<span class="form-txt-danger"></span>:</label>
+                        <input type="text" name="numero" value="{{ flashMessages.get('numero') || '' }}"  class="form-control"  placeholder="">
+                        <span class="text-danger">{{ flashMessages.get('errors.numero') || '' }}</span>
+                       
+                    </div>
+
+                   
+                    <button type="submit" class="btn btn-primary mr-2">SALVAR</button>
+                    <button class="btn btn-light">CANCELAR</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection

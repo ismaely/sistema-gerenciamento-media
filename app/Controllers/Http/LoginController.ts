@@ -20,7 +20,7 @@ export default class LoginController {
             
             return response.redirect('/home')
       } catch (error) {
-          console.log(error);
+          //console.log(error);
           session.flash('msg', 'Dados invalidos')
         
           return response.redirect().back()

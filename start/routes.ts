@@ -32,13 +32,23 @@ Route.group(() => {
 }).middleware('auth')
 
 
-//videos
-Route.get('/listar/video', 'VideosController.listarVideo').middleware('guest')
+//videos  .middleware('guest')
+Route.group(() => {
+Route.get('/listar/video', 'VideosController.listarVideo')
 Route.get('/gravar/video', 'VideosController.gravarVideo')
 Route.post('/salvar/video', 'VideosController.salvarVideo')
 Route.post('/editar/video', 'VideosController.editarVideo')
+}).middleware('auth')
 
 
-//utilizador
-Route.get('/criar-conta', 'UsersController.criarConta')
-Route.post('/criar-conta', 'UsersController.registarConta')
+
+Route.group(() => {
+    //utilizador
+Route.get('/registar/uilizador', 'UsersController.criarConta')
+Route.post('/registar/uilizador', 'UsersController.registarConta')
+
+// placa
+Route.get('/registar/placa-hdmi', 'PlacasController.registarPalca')
+
+}).middleware('auth')
+

@@ -13,7 +13,7 @@ export default class UsersController {
     }
     public async criarConta({response, view}: HttpContextContract) {
         
-        return view.render('users/criarConta')
+        return view.render('users/registarUtilizador')
     }
 
 
@@ -22,15 +22,12 @@ export default class UsersController {
         const validarSchema = schema.create({
             nome: schema.string({trim: true}, [
                 rules.minLength(6),
-                
             ]),
             genero: schema.string({trim: true}),
             telefone: schema.string({trim: true}, [
                 rules.maxLength(64),
                 rules.unique({ table: 'users', column: 'telefone'}),
             ]),
-            //estado: schema.number(),
-            //desiguinacao: schema.string(),
             email: schema.string({trim: true}, [
                 rules.email(),
                 rules.unique({table: 'users', column: 'email'})
@@ -45,8 +42,6 @@ export default class UsersController {
         })
         
         //const user = await User.create(validoDados)
-        
-
         const user = new User()
         user.nome = validoDados.nome
         user.genero = validoDados.genero
@@ -59,8 +54,16 @@ export default class UsersController {
         if(resp.id){
             session.flash('msg', 'Conta criada com sucesso')
         }
-        //await auth.login(user)
         
-        return response.redirect('/criar-conta')
+        return response.redirect('/registar/uilizador')
+    }
+
+
+    /**
+     * registarPlaca
+     */
+    public async formularioAlterarPassword({ response, view,session}: HttpContextContract) {
+        return view.render('users/alterarPassword')
+        
     }
 }
