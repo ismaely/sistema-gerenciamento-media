@@ -5,12 +5,8 @@ import User from 'App/Models/User'
 import env from 'env'
 
 export default class UsersController {
+    
 
-    constructor(){
-       
-      
-        
-    }
     public async criarConta({response, view}: HttpContextContract) {
         
         return view.render('users/registarUtilizador')
@@ -38,6 +34,7 @@ export default class UsersController {
             messages: {
                 'nome.maxLength': 'O nome Não é valido',
                 'email.unique': 'já existe este E-mail',
+                'telefone.unique': 'O numero já existe registrado'
             }
         })
         
@@ -60,10 +57,66 @@ export default class UsersController {
 
 
     /**
-     * registarPlaca
+     * formularioAlterarPassword
      */
     public async formularioAlterarPassword({ response, view,session}: HttpContextContract) {
+        
+
         return view.render('users/alterarPassword')
+        
+    }
+
+     /**
+     * alterarPassword
+     */
+    public async alterarPassword({request, response, auth, session}: HttpContextContract) {
+       
+        if (!request.input('termo')) {
+          session.flash('msg', 'Aceita o termo de responsablidade')
+          return response.redirect().back()
+
+        }
+        else{
+            const email = request.input('email')
+            const password = request.input('password')
+            const confirma = request.input('confirma')
+            const termo = request.input('termo')
+
+            if (password != confirma){
+                session.flash('msg', 'A password não é compativel')
+                return response.redirect().back()
+            }
+           try {
+            const dados = await User.findBy('email',email)
+
+             if (Number(dados.estado) == 1) {
+                session.flash('msg', 'O E-mail não te pertence')
+                return response.redirect().back()
+             }
+             else{
+                 if (dados.estado == 0) {
+                     
+                    dados.password =password
+                    dados.estado = 1
+                    const resp = dados.save()
+
+                    if ((await resp).estado == 1) {
+                        await auth.attempt(email, password)
+                        return response.redirect('/home')
+                    }
+                   
+                 }
+             }
+
+           } catch (error) {
+               console.log('erro ao trocar senha');
+               session.flash('msg', 'O email não é valido')
+           }
+            
+        }
+        
+
+        return response.redirect().back()
         
     }
 }

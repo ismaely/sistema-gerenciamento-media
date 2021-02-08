@@ -35,7 +35,7 @@
                     <div class="col-sm-4">
                        <!-- <button id="play"  class="btn btn-danger" disabled>Play</button>-->
                         <button id="download" class="btn  btn-success" data-toggle="modal" data-target="#exampleModalCenter" disabled>Salvar</button> 
-
+                       
                         
                     </div>
                 </div>
@@ -86,6 +86,8 @@ const recordButton = document.querySelector('button#record');
 const downloadButton = document.querySelector('button#download');
 
 const enviarButton = document.querySelector('button#enviar');
+
+
 
 
 
@@ -165,16 +167,7 @@ function stopRecording() {
  
 }
 
-/**
-playButton.addEventListener('click', () => {
-  const superBuffer = new Blob(recordedBlobs, {type: 'video/webm'});
-  recordedVideo.src = null;
-  recordedVideo.srcObject = null;
-  recordedVideo.src = window.URL.createObjectURL(superBuffer);
-  recordedVideo.controls = true;
-  recordedVideo.play();
-});
-*/
+
 
 downloadButton.addEventListener('click', () => {
   const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
