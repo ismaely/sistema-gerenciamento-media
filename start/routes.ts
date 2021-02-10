@@ -37,27 +37,26 @@ Route.group(() => {
 
 //videos  .middleware('guest')
 Route.group(() => {
-Route.get('/listar/video', 'VideosController.listarVideo')
-Route.get('/gravar/video', 'VideosController.gravarVideo')
-Route.post('/salvar/video', 'VideosController.salvarVideo')
-Route.post('/editar/video', 'VideosController.editarVideo')
+    Route.get('/listar/video', 'VideosController.listarVideo')
+    Route.get('/gravar/video', 'VideosController.gravarVideo')
+    Route.post('/salvar/video', 'VideosController.salvarVideo')
+    Route.post('/editar/video', 'VideosController.editarVideo')
 
-// Ecra
-Route.get('/gravar/ecra', 'VideosController.gravarEcra')
-Route.post('/salvar/ecra', 'VideosController.salvarEcra')
+    // Ecra
+    Route.get('/gravar/ecra', 'VideosController.gravarEcra')
+    Route.post('/salvar/ecra', 'VideosController.salvarEcra')
 
-// placa
-Route.get('/registar/placa', 'PlacasController.registarPalca')
-Route.post('/registar/placa-salvar', 'PlacasController.salvarDadosPlaca')
+    // placa
+    Route.get('/registar/placa', 'PlacasController.registarPalca')
+    Route.post('/registar/placa-salvar', 'PlacasController.salvarDadosPlaca')
 }).middleware('auth')
 
 
 
 Route.group(() => {
     //utilizador
-Route.get('/registar/uilizador', 'UsersController.criarConta')
-Route.post('/registar/uilizador', 'UsersController.registarConta')
-
+    Route.get('/registar/uilizador', 'UsersController.criarConta')
+    Route.post('/registar/uilizador', 'UsersController.registarConta')
 
 }).middleware('auth')
 

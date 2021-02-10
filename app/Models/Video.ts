@@ -12,9 +12,18 @@ export default class Video extends BaseModel {
   public updatedAt: DateTime
 
   @column()
-  public titulo: string
+  public titulo: String
 
   @column()
-  public nome: string
+  public nome: String
+
+  @column()
+  public transcricao: String
+
+  @column()
+  public imagem: String
+
+  @column()
+  public duracao: DateTime
 
 }

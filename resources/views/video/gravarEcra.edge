@@ -8,7 +8,7 @@
   video {
     margin-top: -33px;
     width: 222%;
-    height: 80%;
+    height: 50%;
     border-radius: 5px;
     border: 1px solid black;
   }
@@ -33,9 +33,10 @@
                             <!--<label for="exampleInputUsername2" class="col-sm-2 col-form-label">Ecra (Opções)</label>-->
                             Ecra (Opções)
                             <div class="col-sm-3">
-                                <select class="form-control" id="exampleInputUsername2" name="genero">
-                                    <option value="Mssculino">1º Ecra</option>
-                                    <option value="Femenino">2º Ecra</option>
+                                <select class="form-control" id="id-ecra" name="ecra">
+                                  {{{
+                                    placa.map((x) => `<option value="${x.id}">${x.nome}</option>`)
+                                  }}}
                                 </select>
                             </div>
 
@@ -43,17 +44,17 @@
                             
                             Opções
                             <div class="col-sm-3">
-                                <select class="form-control" id="exampleInputUsername2" name="genero">
-                                    <option value="Mssculino">Video</option>
-                                    <option value="Femenino">Video + Transcrição</option>
-                                    <option value="Femenino">Video + Imagem</option>
-                                    <option value="Femenino">Video + Imagem + Transcrição</option>
+                                <select class="form-control" id="id-opcaoVideo" name="opcaoVideo">
+                                    <option value="1">Video</option>
+                                    <option value="2">Video + Transcrição</option>
+                                    <option value="3">Video + Imagem</option>
+                                    <option value="4">Video + Imagem + Transcrição</option>
                                 </select>
                             </div>
 
                             Duração
                             <div class="col-sm-3">
-                             <input type="time" name="duracao" class="col-sm-11">
+                             <input type="time" name="duracao"  id="id-duracao" class="col-sm-11">
                                 
                             </div>
 
@@ -89,12 +90,11 @@
 
 <script>
   
-  
     var video = document.querySelector('video');
-    const btnStartRecording =document.getElementById('btn-start-recording');
+    var btnStartRecording =document.getElementById('btn-start-recording');
     var btnStopRecording = document.getElementById('btn-stop-recording');
-
    
+
 
     function invokeGetDisplayMedia(success, error) {
     var displaymediastreamconstraints = {
@@ -135,19 +135,34 @@
 
   function stopRecordingCallback() {
     video.src = video.srcObject = null;
-    video.src = URL.createObjectURL(recorder.getBlob());
+    //const x = recorder.getBlob();
 
+   
+    //video.src = URL.createObjectURL(x);
+
+    console.log(invokeSaveAsDialog(recorder.getBlob(), 'dsdsdFDFDF.mp4'));
+    //const fileVideo = new File([recorder.getBlob()], 'familia', {type: 'video/mp4'});
+    
+    
+   
+    //invokeSaveAsDialog(recorder.getBlob(), 'dsdsdFDFDF.mp4').move('./')
+    video.src = URL.createObjectURL(fileVideo); 
+    
+    fileVideo.moveFile()
     recorder.screen.stop();
     recorder.destroy();
     recorder = null;
 
     // document.getElementById('btn-start-recording').disabled = false;
   }
+
   var recorder;  // globally
 
   
   function inciarGravacao() {
     this.disabled = true;
+    //console.log($('#id-ecra').val());
+
     captureScreen(function(screen) {
       video.srcObject = screen;
 
@@ -157,8 +172,6 @@
       });
 
       recorder.startRecording();
-
-      // release screen on stopRecording
       recorder.screen = screen;
 
       document.getElementById('btn-stop-recording').disabled = false;
@@ -167,7 +180,6 @@
 
   document.getElementById('btn-stop-recording').onclick = function() {
     this.disabled = true;
-    console.log(recorder);
     recorder.stopRecording(stopRecordingCallback);
     
     

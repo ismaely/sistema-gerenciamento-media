@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Application from '@ioc:Adonis/Core/Application'
 import Video from 'App/Models/Video'
+import Placa from 'App/Models/Placa'
 
 
 export default class VideosController {
@@ -56,9 +57,9 @@ export default class VideosController {
     /**
      * gravarEcra
      */
-    public async gravarEcra({request, response,view}: HttpContextContract) {
-
-        return view.render('video/gravarEcra')
+    public async gravarEcra({request,view}: HttpContextContract) {
+        const placa = await Placa.all()
+        return view.render('video/gravarEcra',{placa})
         
     }
 
