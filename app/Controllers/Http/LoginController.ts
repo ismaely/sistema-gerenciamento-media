@@ -16,11 +16,14 @@ export default class LoginController {
         try {
             const {email, password} = request.all()
             const resp = await auth.attempt(email, password)
-            //await auth.login(resp)
+           
+            if (resp.estado!=1) {
+                await auth.logout()
+                return response.redirect('/formulario/password')
+            } 
             
             return response.redirect('/home')
       } catch (error) {
-          console.log(error);
           session.flash('msg', 'Dados invalidos')
         
           return response.redirect().back()

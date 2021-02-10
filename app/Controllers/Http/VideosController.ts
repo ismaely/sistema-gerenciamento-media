@@ -19,7 +19,7 @@ export default class VideosController {
      * async gravarVideo
      */
     public async gravarVideo({view}: HttpContextContract) {
-        return view.render('video/gravar')
+        return view.render('video/gravarVideo')
     }
 
 
@@ -38,18 +38,35 @@ export default class VideosController {
             if (!file) {
                 console.log('o ficheiro não é video')
             }
-
             await file.move(caminho)
-
-            await Video.create({
+            const resp = await Video.create({
                 titulo: titulo,
                 nome: nome,
             })
-            
+            if (resp.id) {
+                session.flash('msg', 'Midia gravada com sucesso')
+            }
+            else{
+                session.flash('erro', 'Não foi possivel gravar a Mídia')
+            }
         }
-            
-        session.flash('msg', 'Midia gravada com sucesso')
+        return response.redirect().back()
+    }
+
+    /**
+     * gravarEcra
+     */
+    public async gravarEcra({request, response,view}: HttpContextContract) {
+
+        return view.render('video/gravarEcra')
         
+    }
+
+    /**
+     * salvarEcra
+     */
+    public async salvarEcra({request, response,view}: HttpContextContract) {
+    
         return response.redirect().back()
     }
 
@@ -64,7 +81,7 @@ export default class VideosController {
 
         const resp = await Video.find(id)
         //resp.titulo = titulo
-        console.log(Application.tmpPath('uploads'));
+        //console.log(Application.tmpPath('uploads'));
         
 
         //await resp.save()

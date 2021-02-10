@@ -25,20 +25,39 @@ Route.get('/', 'LoginController.index')
 Route.get('/login', 'LoginController.login')
 Route.post('/login', 'LoginController.login')
 
+// alterar senha padrão 
+Route.get('/formulario/password', 'UsersController.formularioAlterarPassword')
+Route.post('/alterar/password', 'UsersController.alterarPassword')
+
 //Home
 Route.group(() => {
     Route.get('/home', 'HomeController.home')
     Route.get('/logout/user', 'LoginController.logout')
 }).middleware('auth')
 
-
-//videos
-Route.get('/listar/video', 'VideosController.listarVideo').middleware('guest')
+//videos  .middleware('guest')
+Route.group(() => {
+Route.get('/listar/video', 'VideosController.listarVideo')
 Route.get('/gravar/video', 'VideosController.gravarVideo')
 Route.post('/salvar/video', 'VideosController.salvarVideo')
 Route.post('/editar/video', 'VideosController.editarVideo')
 
+// Ecra
+Route.get('/gravar/ecra', 'VideosController.gravarEcra')
+Route.post('/salvar/ecra', 'VideosController.salvarEcra')
 
-//utilizador
-Route.get('/criar-conta', 'UsersController.criarConta')
-Route.post('/criar-conta', 'UsersController.registarConta')
+// placa
+Route.get('/registar/placa', 'PlacasController.registarPalca')
+Route.post('/registar/placa-salvar', 'PlacasController.salvarDadosPlaca')
+}).middleware('auth')
+
+
+
+Route.group(() => {
+    //utilizador
+Route.get('/registar/uilizador', 'UsersController.criarConta')
+Route.post('/registar/uilizador', 'UsersController.registarConta')
+
+
+}).middleware('auth')
+

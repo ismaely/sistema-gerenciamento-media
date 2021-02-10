@@ -1,0 +1,199 @@
+@layout('layouts/dasboard')
+
+@section('master')
+
+<style>
+ 
+
+  video {
+    margin-top: -33px;
+    width: 222%;
+    height: 80%;
+    border-radius: 5px;
+    border: 1px solid black;
+  }
+</style>
+<div class="row">
+  @if(flashMessages.has('msg'))
+  <div class="col-md-12">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <b>{{ flashMessages.get('msg') }}</b>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <i class="ik ik-x"></i>
+  </button>
+    </div>
+  </div>
+  @endif
+    <div class="col-md-12">
+        <div class="card">
+            <div class="p-4 border-top mt-2">
+                <div class="row text-center">
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <!--<label for="exampleInputUsername2" class="col-sm-2 col-form-label">Ecra (Opções)</label>-->
+                            Ecra (Opções)
+                            <div class="col-sm-3">
+                                <select class="form-control" id="exampleInputUsername2" name="genero">
+                                    <option value="Mssculino">1º Ecra</option>
+                                    <option value="Femenino">2º Ecra</option>
+                                </select>
+                            </div>
+
+
+                            
+                            Opções
+                            <div class="col-sm-3">
+                                <select class="form-control" id="exampleInputUsername2" name="genero">
+                                    <option value="Mssculino">Video</option>
+                                    <option value="Femenino">Video + Transcrição</option>
+                                    <option value="Femenino">Video + Imagem</option>
+                                    <option value="Femenino">Video + Imagem + Transcrição</option>
+                                </select>
+                            </div>
+
+                            Duração
+                            <div class="col-sm-3">
+                             <input type="time" name="duracao" class="col-sm-11">
+                                
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    
+                   
+                </div>
+                <div class="row text-center">
+                  <div class="col-sm-4">
+                    <button id="btn-start-recordingt" class="btn btn-primary" onclick=" inciarGravacao()">Inciar Gravação</button>
+                    <button id="btn-stop-recording" class="btn btn-info" disabled>Stop e Salvar</button>
+                    <!--<button id="download" class="btn  btn-success" disabled>Salvar</button> -->
+                </div>
+                </div>
+
+            </div>
+            <div class="card-body text-center">
+                <div class="col-md-5">
+                    <video controls autoplay  playsinline ></video>
+                   
+                </div>
+               
+            </div>
+            
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+  
+  
+    var video = document.querySelector('video');
+    const btnStartRecording =document.getElementById('btn-start-recording');
+    var btnStopRecording = document.getElementById('btn-stop-recording');
+
+   
+
+    function invokeGetDisplayMedia(success, error) {
+    var displaymediastreamconstraints = {
+      video: {
+        displaySurface: 'monitor', // monitor, window, application, browser
+        logicalSurface: true,
+        cursor: 'always', // never, always, motion
+       
+      },
+      audio: true
+    };
+
+    // that's why overriding them
+    displaymediastreamconstraints = {
+      video: true,
+      audio: true, 
+    };
+
+    if (navigator.mediaDevices.getDisplayMedia) {
+      navigator.mediaDevices.getDisplayMedia(displaymediastreamconstraints).then(success).catch(error);
+    } else {
+      navigator.getDisplayMedia(displaymediastreamconstraints).then(success).catch(error);
+    }
+  }
+
+
+  function captureScreen(callback) {
+    invokeGetDisplayMedia(function(screen) {
+      addStreamStopListener(screen, function() {
+        document.getElementById('btn-stop-recording').click();
+      });
+      callback(screen);
+    }, function(error) {
+      console.error(error);
+      alert('Unable to capture your screen. Please check console logs.\n' + error);
+    });
+  }
+
+  function stopRecordingCallback() {
+    video.src = video.srcObject = null;
+    video.src = URL.createObjectURL(recorder.getBlob());
+
+    recorder.screen.stop();
+    recorder.destroy();
+    recorder = null;
+
+    // document.getElementById('btn-start-recording').disabled = false;
+  }
+  var recorder;  // globally
+
+  
+  function inciarGravacao() {
+    this.disabled = true;
+    captureScreen(function(screen) {
+      video.srcObject = screen;
+
+      recorder = RecordRTC(screen, {
+        type: 'video',
+        audio: true
+      });
+
+      recorder.startRecording();
+
+      // release screen on stopRecording
+      recorder.screen = screen;
+
+      document.getElementById('btn-stop-recording').disabled = false;
+    });
+  };
+
+  document.getElementById('btn-stop-recording').onclick = function() {
+    this.disabled = true;
+    console.log(recorder);
+    recorder.stopRecording(stopRecordingCallback);
+    
+    
+  };
+  
+  function addStreamStopListener(stream, callback) {
+    stream.addEventListener('ended', function() {
+      callback();
+      callback = function() {};
+    }, false);
+    stream.addEventListener('inactive', function() {
+      callback();
+      callback = function() {};
+    }, false);
+    stream.getTracks().forEach(function(track) {
+      track.addEventListener('ended', function() {
+        callback();
+        callback = function() {};
+      }, false);
+      track.addEventListener('inactive', function() {
+        callback();
+        callback = function() {};
+      }, false);
+    });
+  }
+
+</script>
+
+@endsection

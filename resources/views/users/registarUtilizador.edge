@@ -24,14 +24,14 @@
                 <form class="forms-sample" action="{{ route('UsersController.registarConta') }}" method="POST">
                     <div class="form-group">
                         <label for="exampleInputName1">Username<span class="form-txt-danger">*</span>:</label>
-                        <input type="text" name="nome" value="{{ flashMessages.get('nome') || '' }}" class="form-control" id="exampleInputName1" placeholder="cipre.cipre">
+                        <input type="text" name="nome" value="{{ flashMessages.get('nome') || '' }}" class="form-control"  placeholder="cipra.cipra">
                         <span class="text-danger">{{ flashMessages.get('errors.nome') || '' }}</span>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail3">Telefone<span class="form-txt-danger">*</span>:</label>
-                                <input type="text" name="telefone"  value="{{ flashMessages.get('telefone') || '' }}" class="form-control" name="telefone" " placeholder="Telefone">
+                                <input type="text" name="telefone"  value="{{ flashMessages.get('telefone') || '' }}" class="form-control"  placeholder="Telefone">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -46,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">E-mail<span class="form-txt-danger">*</span>:</label>
-                        <input type="email" name="email" value="{{ flashMessages.get('email') || '' }}"  class="form-control"  placeholder="cipre@cipre.com" required>
+                        <input type="email" name="email" value="{{ flashMessages.get('email') || '' }}"  class="form-control"  placeholder="cipra@cipra.com" required>
                         <span class="text-danger">{{ flashMessages.get('errors.email') || '' }}</span>
                        
                     </div>
