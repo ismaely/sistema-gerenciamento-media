@@ -140,15 +140,12 @@
    
     //video.src = URL.createObjectURL(x);
 
-    console.log(invokeSaveAsDialog(recorder.getBlob(), 'dsdsdFDFDF.mp4'));
-    //const fileVideo = new File([recorder.getBlob()], 'familia', {type: 'video/mp4'});
-    
-    
+    console.log(invokeSaveAsDialog(recorder.getBlob(), new Date().toUTCString()+'.mp4'));
+    //const fileVideo = new File([recorder.getBlob()], new Date(), {type: 'video/mp4'});
    
     //invokeSaveAsDialog(recorder.getBlob(), 'dsdsdFDFDF.mp4').move('./')
-    video.src = URL.createObjectURL(fileVideo); 
+   // video.src = URL.createObjectURL(fileVideo); 
     
-    fileVideo.moveFile()
     recorder.screen.stop();
     recorder.destroy();
     recorder = null;
