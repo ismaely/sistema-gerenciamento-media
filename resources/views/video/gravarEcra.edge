@@ -3,8 +3,6 @@
 @section('master')
 
 <style>
- 
-
   video {
     margin-top: -33px;
     width: 222%;
@@ -39,9 +37,6 @@
                                   }}}
                                 </select>
                             </div>
-
-
-                            
                             Opções
                             <div class="col-sm-3">
                                 <select class="form-control" id="id-opcaoVideo" name="opcaoVideo">
@@ -55,14 +50,10 @@
                             Duração
                             <div class="col-sm-3">
                              <input type="time" name="duracao"  id="id-duracao" class="col-sm-11">
-                                
                             </div>
 
                         </div>
-
-
                     </div>
-                    
                    
                 </div>
                 <div class="row text-center">
@@ -93,8 +84,6 @@
     var video = document.querySelector('video');
     var btnStartRecording =document.getElementById('btn-start-recording');
     var btnStopRecording = document.getElementById('btn-stop-recording');
-   
-
 
     function invokeGetDisplayMedia(success, error) {
     var displaymediastreamconstraints = {
@@ -124,6 +113,7 @@
   function captureScreen(callback) {
     invokeGetDisplayMedia(function(screen) {
       addStreamStopListener(screen, function() {
+       
         document.getElementById('btn-stop-recording').click();
       });
       callback(screen);
@@ -136,25 +126,20 @@
   function stopRecordingCallback() {
     video.src = video.srcObject = null;
     //const x = recorder.getBlob();
-
-   
     //video.src = URL.createObjectURL(x);
-
-    console.log(invokeSaveAsDialog(recorder.getBlob(), new Date().toUTCString()+'.mp4'));
-    //const fileVideo = new File([recorder.getBlob()], new Date(), {type: 'video/mp4'});
-   
-    //invokeSaveAsDialog(recorder.getBlob(), 'dsdsdFDFDF.mp4').move('./')
-   // video.src = URL.createObjectURL(fileVideo); 
+    salavarGravacao()
+    //console.log(invokeSaveAsDialog(recorder.getBlob(), new Date().toUTCString()+'.mp4'));
+   // video.src = URL.createObjectURLrecorder.getBlob());
     
     recorder.screen.stop();
     recorder.destroy();
     recorder = null;
-
-    // document.getElementById('btn-start-recording').disabled = false;
+    
   }
 
-  var recorder;  // globally
+ 
 
+  var recorder;  // globally
   
   function inciarGravacao() {
     this.disabled = true;
@@ -165,23 +150,37 @@
 
       recorder = RecordRTC(screen, {
         type: 'video',
-        audio: true
       });
 
       recorder.startRecording();
       recorder.screen = screen;
-
       document.getElementById('btn-stop-recording').disabled = false;
     });
-  };
+  }
 
   document.getElementById('btn-stop-recording').onclick = function() {
     this.disabled = true;
     recorder.stopRecording(stopRecordingCallback);
     
-    
   };
   
+function salavarGravacao(){
+
+const formData = new FormData();
+const xhr = new XMLHttpRequest();
+const date = new Date()
+const nome = date.toISOString().substr(0,10)+'-'+date.toTimeString().substr(0,8)+'.mp4';
+const fileVideo = new File([recorder.getBlob()], nome, {type: 'video/mp4'});
+
+formData.append('video-blob', fileVideo);
+formData.append('video-filename', fileVideo.name);
+formData.append('titulo', nome);
+
+xhr.open('POST', '/salvar/ecra');
+xhr.send(formData);
+
+
+}
   function addStreamStopListener(stream, callback) {
     stream.addEventListener('ended', function() {
       callback();

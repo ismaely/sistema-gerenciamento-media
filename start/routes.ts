@@ -48,7 +48,7 @@ Route.group(() => {
 
     // placa
     Route.get('/registar/placa', 'PlacasController.registarPalca')
-    Route.post('/registar/placa-salvar', 'PlacasController.salvarDadosPlaca')
+    Route.post('/registar/placa', 'PlacasController.salvarDadosPlaca')
 }).middleware('auth')
 
 

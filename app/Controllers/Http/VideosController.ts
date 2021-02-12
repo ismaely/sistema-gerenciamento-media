@@ -64,9 +64,22 @@ export default class VideosController {
     }
 
     /**
-     * salvarEcra
+     * salvar Ecra
      */
     public async salvarEcra({request, response,view}: HttpContextContract) {
+        const file = request.file('video-blob')
+        const titulo = request.input('titulo');
+        const nome = request.input('video-filename')
+         
+        const caminho = Application.publicPath('uploads')
+
+        await file.move(caminho)
+        
+        const resp = await Video.create({
+            titulo: titulo,
+            nome: nome,
+        })
+
     
         return response.redirect().back()
     }
@@ -81,10 +94,8 @@ export default class VideosController {
         const nome = request.input('nome')
 
         const resp = await Video.find(id)
-        //resp.titulo = titulo
-        //console.log(Application.tmpPath('uploads'));
-        
 
+        //console.log(Application.tmpPath('uploads'));
         //await resp.save()
         
         session.flash('msg', 'Dados alterado com sucesso')
