@@ -101,4 +101,14 @@ export default class VideosController {
         session.flash('msg', 'Dados alterado com sucesso')
         return response.redirect().back()
     }
+
+
+    public async buscarVideo({request, response, session}: HttpContextContract) {
+
+        const id = request.input('id')
+        console.log(id);
+        const arrayItem =  await Video.findBy('id', id)
+        
+        return arrayItem
+    }
 }

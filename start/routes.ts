@@ -52,6 +52,13 @@ Route.group(() => {
 }).middleware('auth')
 
 
+// requisição ajax
+Route.group(() => {
+   
+    Route.post('/visualizar/video', 'VideosController.buscarVideo')
+
+}).middleware('auth')
+
 
 Route.group(() => {
     //utilizador
@@ -59,4 +66,5 @@ Route.group(() => {
     Route.post('/registar/uilizador', 'UsersController.registarConta')
 
 }).middleware('auth')
+
 
