@@ -174,39 +174,6 @@
         <div class="separator mb-20"></div>
         @each(midia in arrayItem)
 
-        <div class="modal fade edit-layout-modal" id="editLayoutItem" tabindex="-1" role="dialog" aria-labelledby="editLayoutItemLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editLayoutItemLabel">Titulo: {{ midia.titulo }}<b> </b></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="lead"></p>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <video controls class="col-md-12">
-                                    <source src="../uploads/{{midia.nome}}"  type="video/mp4">
-                                </video>
-                                
-                                <!--<img src="../img/portfolio-1.jpg" class="img-fluid" alt="">-->
-                            </div>
-                        </div>
-                        <!--
-                        <div class="jumbotron pt-30 pb-30 mt-30">
-                            <h2 class="mt-0"></h2>
-                            <p class="lead"></p>
-                        </div>
-                    -->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a data-toggle="modal" data-target="#exampleModalCenter" data-dismiss="modal" class="btn btn-primary">Editar</a>
-                        <!--<button type="button" class="btn btn-danger list-delete">Delete</button>-->
-                    </div>
-                </div>
-            </div>
-        </div>
         
         <div class="row layout-wrap" id="layout-wrap">
             <div class="col-12 list-item">
@@ -233,7 +200,7 @@
                         </div>
                         </div>
                         <div class="list-actions">
-                            <a href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem"><i class="ik ik-eye"></i></a>
+                            <a href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem" onclick="video({{ midia.id }})"><i class="ik ik-eye"></i></a>
                             <a data-toggle="modal" data-target="#exampleModalCenter" data-dismiss="modal"q><i class="ik ik-edit-2"></i></a>
                             <!--<a href="#" class="list-delete"><i class="ik ik-trash-2"></i></a>-->
                         </div>
@@ -266,7 +233,6 @@
                     <form class="forms-sample" action="{{ route('VideosController.editarVideo') }}" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                       <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo" required>
-                      
                     </div>
                     
                     <div style="display:none">
@@ -276,7 +242,6 @@
                   
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                      
                         <button type="submit" id="enviar" class="btn btn-primary" >Enviar</button>
                        
                     </div>
@@ -287,8 +252,73 @@
           
         
         @endeach
+
+        <div class="modal fade edit-layout-modal" id="editLayoutItem" tabindex="-1" role="dialog" aria-labelledby="editLayoutItemLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editLayoutItemLabel"><b>Titulo</b>: <span id="nomeTitulo"> </span><b> </b></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="lead"></p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <video controls class="col-md-12"  id="visualizar">
+                                    
+                                </video>
+                                
+                                <!--<img src="../img/portfolio-1.jpg" class="img-fluid" alt="">-->
+                            </div>
+                        </div>
+                        <!-- 
+                        <div class="jumbotron pt-30 pb-30 mt-30">
+                            <h2 class="mt-0"></h2>
+                            <p class="lead"></p>
+                        </div>
+                    -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a data-toggle="modal" data-target="#exampleModalCenter" data-dismiss="modal" class="btn btn-primary">Editar</a>
+                        <!--<button type="button" class="btn btn-danger list-delete">Delete</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>
+<script>
+
+function video(id){
+
+    fetch("/visualizar/video",{
+        method: 'POST',
+        body: JSON.stringify({
+            id:id
+        }),
+        headers:{
+            "Content-Type":"application/json; charset=UTF-8"
+        }
+    })
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+        var nomeTitulo = document.getElementById('nomeTitulo')
+        var visualizar = document.getElementById('visualizar')
+        var video = data.nome
+
+        nomeTitulo.innerText =`${data.titulo}`
+        visualizar.innerHTML = `<source src="../uploads/${video}"  type="video/mp4">`
+        console.log(video);
+        console.log(id);
+    })
+
+}
+
+</script>
 
 
 @endsection
