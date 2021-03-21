@@ -2,6 +2,17 @@
 
 @section('master')
 
+<style>
+  video {
+    margin-top: 0px;
+    width: 250%;
+    height: 1%;
+    border-radius: 9px;
+    border: 1px solid black;
+    background-color: #000;
+  }
+</style>
+
 <div class="row">
   @if(flashMessages.has('msg'))
   <div class="col-md-12">
@@ -14,16 +25,14 @@
   </div>
   @endif
     <div class="col-md-12">
-        <div class="card">
+        <div class="card" >
             <div class="card-body text-center">
                 <div class="col-md-5">
                     <video id="gum"  playsinline autoplay muted></video>
-                    <video id="recorded" playsinline loop></video>
-                   
                 </div>
                
             </div>
-            <div class="p-4 border-top mt-2">
+            <div class="p-4 border-top mt-2" style="background-color:#fff">
                 <div class="row text-center">
                     <div class="col-sm-4">
                         <button id="start" class="btn btn-primary">Ligar a camera</button>
@@ -34,7 +43,7 @@
                   </div>
                     <div class="col-sm-4">
                        <!-- <button id="play"  class="btn btn-danger" disabled>Play</button>-->
-                        <button id="download" class="btn  btn-success" data-toggle="modal" data-target="#exampleModalCenter" disabled>Salvar</button> 
+                        <button id="download" class="btn  btn-success" data-toggle="modal" data-target="#exampleModalCenter" disabled>Guardar</button> 
                        
                         
                     </div>

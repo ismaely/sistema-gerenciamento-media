@@ -4,13 +4,17 @@
 
 <style>
   video {
-    margin-top: -33px;
-    width: 222%;
-    height: 50%;
-    border-radius: 5px;
-    border: 1px solid black;
+    margin-top: -14px;
+    width: 110%;
+    
+    border-radius: 9px;
+    border: 5px solid white;
   }
+ 
+}
+
 </style>
+
 <div class="row">
   @if(flashMessages.has('msg'))
   <div class="col-md-12">
@@ -22,63 +26,45 @@
     </div>
   </div>
   @endif
-    <div class="col-md-12">
-        <div class="card">
-            <div class="p-4 border-top mt-2">
-                <div class="row text-center">
-                    <div class="col-sm-12">
-                        <div class="form-group row">
-                            <!--<label for="exampleInputUsername2" class="col-sm-2 col-form-label">Ecra (Opções)</label>-->
-                            Ecra (Opções)
-                            <div class="col-sm-3">
-                                <select class="form-control" id="id-ecra" name="ecra">
-                                  {{{
-                                    placa.map((x) => `<option value="${x.id}">${x.nome}</option>`)
-                                  }}}
-                                </select>
-                            </div>
-                            Opções
-                            <div class="col-sm-3">
-                                <select class="form-control" id="id-opcaoVideo" name="opcaoVideo">
-                                    <option value="1">Video</option>
-                                    <option value="2">Video + Transcrição</option>
-                                    <option value="3">Video + Imagem</option>
-                                    <option value="4">Video + Imagem + Transcrição</option>
-                                </select>
-                            </div>
 
-                            Duração
-                            <div class="col-sm-3">
-                             <input type="time" name="duracao"  id="id-duracao" class="col-sm-11">
-                            </div>
+  <div class="col-md-12">
 
-                        </div>
-                    </div>
-                   
-                </div>
-                <div class="row text-center">
-                  <div class="col-sm-4">
-                    <button id="btn-start-recordingt" class="btn btn-primary" onclick=" inciarGravacao()">Inciar Gravação</button>
-                    <button id="btn-stop-recording" class="btn btn-info" disabled>Stop e Salvar</button>
-                    <!--<button id="download" class="btn  btn-success" disabled>Salvar</button> -->
-                </div>
-                </div>
+  <div class="card" style="background-color: #fff" >
 
-            </div>
-            <div class="card-body text-center">
-                <div class="col-md-5">
-                    <video controls autoplay  playsinline ></video>
-                   
-                </div>
-               
-            </div>
+       <div class="card-header" ><h3>Telas de placas</h3></div>
+          
+          <div class="card-body template-demo" style="display: flex; flex-wrap: wrap; justify-content: center;">
+             @each(pl in placa)
+                
+                 <!--<label for="exampleInputUsername2" class="col-sm-2 col-form-label">Ecra (Opções)</label>-->
+                 <div class="col-sm-4" data-toggle="modal" data-target="#exampleModalCenter">
+                    <div style="color:#000;"><h6>{{pl.nome}}</h6></div>
+                    <video controls autoplay  playsinline id={{pl.id}} placeholder={{pl.nome}}></video> <br><br>
+                 </div>
+             @endeach
+          </div>
+
             
-
+            <!--<button id="download" class="btn  btn-success" disabled>Salvar</button> -->
+          </div>  
+         
         </div>
-    </div>
-
-</div>
-
+ 
+    </div>  
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+           <div class="modal-content" style="background-color:transparent; border: transparent">
+              
+                <video style="width: 150%"controls autoplay  playsinline ></video>
+          
+              <div class="modal-footer" style="width: 110%">
+                <button id="btn-start-recordingt" class="btn btn-primary" onclick=" inciarGravacao()">Inciar Gravação</button>
+                <button id="btn-stop-recording" class="btn btn-info" disabled>Stop e Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+             </div>
+      </div>
+  </div>
+  </div>  
 <script>
   
     var video = document.querySelector('video');
