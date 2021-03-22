@@ -54,8 +54,17 @@ export default class VideosController {
         return response.redirect().back()
     }
 
+     /**
+     * gravação da canais possiveis 
+     * @param param0 
+     */
+    public async gravarCanal({request,view}: HttpContextContract) {
+        const placa = await Placa.all()
+        return view.render('video/gravarCanal', {'placa': placa})
+    }
+
     /**
-     * gravarEcra
+     * gravação dos ecras
      */
     public async gravarEcra({request,view}: HttpContextContract) {
         const placa = await Placa.all()
@@ -63,11 +72,7 @@ export default class VideosController {
         
     }
 
-    public async tela({request,view}: HttpContextContract) {
-        
-        return view.render('video/tela')
-        
-    }
+   
 
     /**
      * salvar Ecra

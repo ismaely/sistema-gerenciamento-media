@@ -41,7 +41,7 @@ Route.post('/alterar/password', 'UsersController.alterarPassword')
     Route.get('/gravar/video', 'VideosController.gravarVideo')
     Route.post('/salvar/video', 'VideosController.salvarVideo')
     Route.post('/editar/video', 'VideosController.editarVideo')
-    Route.get('/video/tela', 'VideosController.tela')
+    Route.get('/video/canal', 'VideosController.gravarCanal')
 
     // Ecra
     Route.get('/gravar/ecra', 'VideosController.gravarEcra')
