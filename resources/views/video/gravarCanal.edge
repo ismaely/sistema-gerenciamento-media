@@ -1,7 +1,7 @@
 @layout('layouts/dasboard')
 
 @section('master')
-
+<script src="../js/record-rtc/DetectRTC.js"></script>
 <style>
   video {
     margin-top: -7px;
@@ -29,7 +29,7 @@
 
   <div class="card" style="background-color: #fff" >
 
-       <div class="card-header" ><h3>Ambiente de gravação de canal</h3></div>
+       <div class="card-header" ><h3>Ambiente de gravação dos canais</h3></div>
           
           <div class="card-body template-demo" style="display: flex; flex-wrap: wrap; justify-content: center;">
              @each(dados in placa)
@@ -37,29 +37,26 @@
                  <!--<label for="exampleInputUsername2" class="col-sm-2 col-form-label">Ecra (Opções)</label>-->
                  <div class="col-sm-4" data-toggle="modal" data-target="#exampleModalCenter"   id={{dados.nome}}>
                     <div style="color:#000;"><h6>{{dados.nome}}</h6></div>
-                    <video controls autoplay  playsinline id={{dados.nome}} placeholder={{dados.nome}}></video> <br><br>
+                    <video controls autoplay  playsinline id="canal" ></video> <br><br>
                  </div>
-
-
-                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                       <div class="modal-content" style="background-color:transparent; border: transparent">
-                          
-                            <video style="width: 150%"controls autoplay  playsinline ></video>
-                      
-                            <div class="modal-footer" style="width: 110%">
-                              <button id="start" class="btn btn-primary">Ligar a camera</button>  
-                              <button id="record" class="btn btn-info" disabled>Gravar</button>
-                              <button id="download" class="btn  btn-success" data-toggle="modal" data-target="#exampleModalCenter" disabled>Guardar</button> 
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                           </div>
-                  </div>
-              </div>
-              </div> 
+                
              @endeach
           </div>
 
-            
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                 <div class="modal-content" style="background-color:transparent; border: transparent">
+                      <video style="width: 150%"controls autoplay  playsinline ></video>
+                
+                      <div class="modal-footer" style="width: 110%">
+                        <button id="start" class="btn btn-primary">Ligar a camera</button>  
+                        <button id="record" class="btn btn-info" disabled>Gravar</button>
+                        <button id="download" class="btn  btn-success" data-toggle="modal" data-target="#exampleModalCenter" disabled>Guardar</button> 
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                     </div>
+            </div>
+        </div>
+        </div> 
             <!--<button id="download" class="btn  btn-success" disabled>Salvar</button> -->
           </div>  
          
@@ -93,128 +90,101 @@
   </div>
 
 <script>
+  var allCameraStreams = [];
 
-let mediaRecorder;
-let recordedBlobs;
+function captureAllCameras(callback) {
+  var streams = [];
+  var donotDuplicateDevices = {};
 
-const errorMsgElement = document.querySelector('span#errorMsg');
-//const recordedVideo = document.querySelector('video#recorded');
-const recordButton = document.querySelector('button#record');
-//const playButton = document.querySelector('button#play');
-const downloadButton = document.querySelector('button#download');
+  DetectRTC.videoInputDevices.forEach(function(device, idx) {
+    navigator.mediaDevices.getUserMedia({
+      video: {
+        mandatory: {},
+        optional: [{
+          sourceId: device.id
+        }]
+      }
+    }).then(function(stream) {
+      if (!donotDuplicateDevices[device.id]) {
+        donotDuplicateDevices[device.id] = true;
 
-const enviarButton = document.querySelector('button#enviar');
+        streams.push(stream);
+      }
 
+      allCameraStreams.push(stream);
 
-document.querySelector('button#start').addEventListener('click', async () => {
-  const constraints = {
-    audio: true,
-    video: {
-      facingMode: "user",
-            width: {min: 640, ideal: 1000, max: 1220},
-            height: {min: 480, ideal: 500, max: 1080}
+      if (idx == DetectRTC.videoInputDevices.length - 1) {
+        callback(streams);
+      }
+    }).catch(function(e) {
+      console.error(e);
+    });
+  })
+}
+
+var video = document.querySelector('video');
+
+var timeout = 10; // 10 seconds
+
+DetectRTC.load(function() {
+  captureAllCameras(function(streams) {
+    if (streams.length == 1) {
+      streams.push(streams[0]);
     }
-  };
-  await init(constraints);
+
+    var recorder = RecordRTC(streams, {
+      type: 'video',
+      mimeType: 'video/webm',
+      previewStream: function(s) {
+        video.muted = true;
+        video.srcObject = s;
+      }
+    });
+
+    recorder.startRecording();
+
+    // MediaRecorder API does not allows adding more streams whilst recording is ACTIVE
+    false && setTimeout(function() {
+      // append audio stream after 2 seconds
+      navigator.mediaDevices.getUserMedia({
+        audio: true
+      }).then(function(mic) {
+        let mixer = recorder.getInternalRecorder().getMixer();
+        mixer.appendStreams([mic]);
+        video.srcObject = mixer.getMixedStream();
+        allCameraStreams.push(mic);
+      });
+    }, 2000);
+
+    (function looper() {
+      timeout--;
+
+      if (timeout > 0) {
+        setTimeout(looper, 1000);
+        return;
+      }
+
+      recorder.stopRecording(function() {
+        var blob = recorder.getBlob();
+
+        video.muted = false;
+
+        allCameraStreams.forEach(function(stream) {
+          stream.getTracks().forEach(function(track) {
+            track.stop();
+          });
+        });
+
+        video.srcObject = null;
+        video.src = URL.createObjectURL(blob);
+      });
+    })();
+  });
 });
 
-async function init(constraints) {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia(constraints);
-    handleSuccess(stream);
-  } catch (e) {
-    console.error('navigator.getUserMedia error:', e);
-    //errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
-  }
-}
 
-function handleSuccess(stream) {
-  recordButton.disabled = false;
-  window.stream = stream;
-  const gumVideo = document.querySelector('video#gum');
-  gumVideo.srcObject = stream;
-}
-
-recordButton.addEventListener('click', () => {
-  if (recordButton.textContent === 'Gravar') {
-    startRecording();
-  } else {
-    stopRecording();
-    recordButton.textContent = 'Gravar';
-    //playButton.disabled = false;
-    downloadButton.disabled = false;
-  }
-});
-
-
-function startRecording() {
-  recordedBlobs = [];
-  let options = {mimeType: 'video/webm;codecs=vp9,opus'};
-  try {
-    mediaRecorder = new MediaRecorder(window.stream, options);
-  } catch (e) {
-    console.error('Exception while creating MediaRecorder:', e);
-    errorMsgElement.innerHTML = `Exception while creating MediaRecorder: ${JSON.stringify(e)}`;
-    return;
-  }
-
-  recordButton.textContent = 'Stop Gravação';
-  //playButton.disabled = true;
-  downloadButton.disabled = true;
-  mediaRecorder.onstop = (event) => {
-    //console.log('Recorder stopped: ', event);
-  };
-  mediaRecorder.ondataavailable = handleDataAvailable;
-  mediaRecorder.start();
-}
-
-function handleDataAvailable(event) {
-  if (event.data && event.data.size > 0) {
-    recordedBlobs.push(event.data);
-  }
-}
-
-function stopRecording() {
-  console.log(mediaRecorder.resume());
-  mediaRecorder.stop();
- 
-}
-
-function canalSelecionado(nome){
-
-  alert(nome)
-}
-
-
-downloadButton.addEventListener('click', () => {
-  const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
-  //const url = window.URL.createObjectURL(blob);
-});
-
-enviarButton.addEventListener('click', () => {
-  const date = new Date;
-  const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
-  const formData = new FormData();
-  const xhr = new XMLHttpRequest();
-
-  const name = $('#titulo').val();
-  const titulo = name+'-'+date.toISOString().substr(0,10)+'-'+date.toTimeString().substr(0,8)+'.mp4';
-
-  const fileVideo = new File([blob], titulo, {type: 'video/mp4'});
-
-  formData.append('video-blob', fileVideo);
-  formData.append('video-filename', fileVideo.name);
-  formData.append('titulo', name);
-  formData.append('upload', 'true');
-
-  
-  xhr.open('POST', '/salvar/video');
-  xhr.send(formData);
-  //xhr.onload = function(){ console.log(this.response); };
-  
-
-});
 </script>
+
 
 
 @endsection
