@@ -1,11 +1,10 @@
 @layout('layouts/dasboard')
-
 @section('master')
 
 <div class="row">
     <div class="col-md-2">
     </div>
-    <div class="col-md-7">
+    <div class="col-md-8">
         @if(flashMessages.has('msg'))
         <div class="card-body">
             <div class="alert bg-success alert-success text-white alert-dismissible fade show" role="alert">
@@ -31,8 +30,8 @@
 
         <div class="card">
             
-            <div class="card-header"><h3>Registar Placa de Videos</h3></div>
-            <div class="card-body">
+            <div class="card-header" style="background-color:#fff"><h3>Registar Placa de Videos</h3></div>
+            <div class="card-body" style="background-color:#fff">
                 <form class="forms-sample" action="{{ route('PlacasController.salvarDadosPlaca') }}" method="POST">
                     <div class="form-group">
                         <label for="exampleInputName1">Nome<span class="form-txt-danger">*</span>:</label>
@@ -54,9 +53,8 @@
                         <span class="text-danger">{{ flashMessages.get('errors.numero') || '' }}</span>
                        
                     </div>
-
                    
-                    <button type="submit" class="btn btn-primary mr-2">SALVAR</button>
+                    <button type="submit" class="btn btn-primary mr-2">GUARDAR</button>
                     <button  type="reset" class="btn btn-light">CANCELAR</button>
                 </form>
             </div>

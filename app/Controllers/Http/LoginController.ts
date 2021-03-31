@@ -14,13 +14,13 @@ export default class LoginController {
     public async login({request, response, auth, session }: HttpContextContract) {
         
         try {
-            const {email, password} = request.all()
-            const resp = await auth.attempt(email, password)
+            //const {email, password} = request.all()
+            //const resp = await auth.attempt(email, password)
            
-            if (resp.estado!=1) {
-                await auth.logout()
-                return response.redirect('/formulario/password')
-            } 
+            //if (resp.estado!=1) {
+               // await auth.logout()
+                //return response.redirect('/formulario/password')
+            //} 
             
             return response.redirect('/home')
       } catch (error) {

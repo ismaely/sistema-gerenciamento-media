@@ -30,33 +30,40 @@ Route.get('/formulario/password', 'UsersController.formularioAlterarPassword')
 Route.post('/alterar/password', 'UsersController.alterarPassword')
 
 //Home
-Route.group(() => {
+//Route.group(() => {
     Route.get('/home', 'HomeController.home')
     Route.get('/logout/user', 'LoginController.logout')
-}).middleware('auth')
+//}).middleware('auth')
 
 //videos  .middleware('guest')
-Route.group(() => {
+//Route.group(() => {
     Route.get('/listar/video', 'VideosController.listarVideo')
     Route.get('/gravar/video', 'VideosController.gravarVideo')
     Route.post('/salvar/video', 'VideosController.salvarVideo')
     Route.post('/editar/video', 'VideosController.editarVideo')
+    Route.get('/gravar/tv', 'VideosController.gravarTv')
 
-    // Ecra
-    Route.get('/gravar/ecra', 'VideosController.gravarEcra')
-    Route.post('/salvar/ecra', 'VideosController.salvarEcra')
+
 
     // placa
     Route.get('/registar/placa', 'PlacasController.registarPalca')
     Route.post('/registar/placa', 'PlacasController.salvarDadosPlaca')
-}).middleware('auth')
+//}).middleware('auth')
 
 
+// requisição ajax
+//Route.group(() => {
+   
+    Route.post('/visualizar/video', 'VideosController.buscarVideo')
 
-Route.group(() => {
+//}).middleware('auth')
+
+
+//Route.group(() => {
     //utilizador
     Route.get('/registar/uilizador', 'UsersController.criarConta')
     Route.post('/registar/uilizador', 'UsersController.registarConta')
 
-}).middleware('auth')
+//}).middleware('auth')
+
 

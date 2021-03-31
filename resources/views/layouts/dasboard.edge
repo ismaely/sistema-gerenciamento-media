@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="../css/plugins/c3/c3.min.css">
         <link rel="stylesheet" href="../css/plugins/owl.carousel/dist/assets/owl.carousel.min.css">
         <link rel="stylesheet" href="../css/plugins/owl.carousel/dist/assets/owl.theme.default.min.css">
+        <link rel="stylesheet" href="../css/plugins/jquery-toast-plugin/dist/jquery.toast.min.css">
         <link rel="stylesheet" href="../css/theme.min.css">
         <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
@@ -32,21 +33,13 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-<div class="wrapper">
-    <header class="header-top" header-theme="light">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between">
-                <div class="top-menu d-flex align-items-center">
+<div class="wrapper" >
+    <header class="header-top" header-theme="light" style="background-image: url('../img/auth/back_image.jpg'); background-size: 1400px " >
+        <div class="container-fluid" >
+            <div class="d-flex justify-content-between"  >
+                <div class="top-menu d-flex align-items-center" >
                     <button type="button" class="btn-icon mobile-nav-toggle d-lg-none"><span></span></button>
-                    <!--
-                    <div class="header-search">
-                        <div class="input-group">
-                            <span class="input-group-addon search-close"><i class="ik ik-x"></i></span>
-                            <input type="text" class="form-control">
-                            <span class="input-group-addon search-btn"><i class="ik ik-search"></i></span>
-                        </div>
-                    </div>
-                -->
+                    <br> <br>
 
                     <button type="button" id="navbar-fullscreen" class="nav-link"><i class="ik ik-maximize"></i></button>
                 </div>
@@ -61,17 +54,8 @@
                                         <i class="ik ik-check"></i> 
                                     </span>
                                     <span class="media-body">
-                                        <span class="heading-font-family media-heading">Invitation accepted</span> 
-                                        <span class="media-content">Your have been Invited ...</span>
-                                    </span>
-                                </a>
-                                <a href="#" class="media">
-                                    <span class="d-flex">
-                                        <img src="img/users/1.jpg" class="rounded-circle" alt="">
-                                    </span>
-                                    <span class="media-body">
-                                        <span class="heading-font-family media-heading">Steve Smith</span> 
-                                        <span class="media-content">I slowly updated projects</span>
+                                        <span class="heading-font-family media-heading">Agendado</span> 
+                                        <span class="media-content">Em espera ...</span>
                                     </span>
                                 </a>
                                 
@@ -80,13 +64,13 @@
                         </div>
                     </div>
                     
-                    <button type="button" class="nav-link ml-10" id="apps_modal_btn" data-toggle="modal" data-target="#appsModal"><i class="ik ik-grid"></i></button>
+                   
                     <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="avatar" src="../img/user.jpg" alt=""></a>
+                        <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="avatar" src="../img/user.png" alt=""></a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="profile.html"><i class="ik ik-user dropdown-icon"></i> Profile</a>
-                            <a class="dropdown-item" href="#"><i class="ik ik-settings dropdown-icon"></i> Settings</a>
-                            <a class="dropdown-item" href="/logout/user"><i class="ik ik-power dropdown-icon"></i> Logout</a>
+                            <a class="dropdown-item" href="profile.html" style="color:#9aa0ac;"><i class="ik ik-user dropdown-icon"></i>Perfil</a>
+                            <a class="dropdown-item" href="#" style="color:#9aa0ac;"><i class="ik ik-settings dropdown-icon"></i>Configurações</a>
+                            <a class="dropdown-item" href="/logout/user" style="color:#9aa0ac;"><i class="ik ik-power dropdown-icon"></i>Sair</a>
                         </div>
                     </div>
 
@@ -96,14 +80,13 @@
     </header>
 
     <div class="page-wrap">
-        <div class="app-sidebar colored">
-            <div class="sidebar-header">
-                <a class="header-brand" href="{{ route('HomeController.home') }}">
+        <div class="app-sidebar colored" >
+            <div class="sidebar-header" >
                     <div class="logo-img">
-                        <img src="../img/brand-white.svg" class="header-brand-img" alt="lavalite"> 
+                        
+                        <a href="{{ route('HomeController.home') }}"><img src="/img/auth/logo.svg" width="170px" class="header-brand-img" alt="lavalite"> </a>
                     </div>
-                    <span class="text">CIPRA</span>
-                </a>
+                
                 <button type="button" class="nav-toggle"><i data-toggle="expanded" class="ik ik-toggle-right toggle-icon"></i></button>
                 <button id="sidebarClose" class="nav-close"><i class="ik ik-x"></i></button>
             </div>
@@ -113,40 +96,43 @@
         <nav id="main-menu-navigation" class="navigation-main">
             <div class="nav-lavel">Menu</div>
             <div class="nav-item active">
-                <a href="{{ route('HomeController.home') }}"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
+                <a href="{{ route('HomeController.home') }}"><i class="ik ik-bar-chart-2"></i><span>Inicio</span></a>
             </div>
             
             
             <div class="nav-item has-sub">
-                <a href="#"><i class="ik ik-box"></i><span>Mídia</span></a>
+                <a href="#"><i class="ik ik-monitor"></i><span>Televisão</span></a>
                 <div class="submenu-content">
                     
-                    <a href="" class="menu-item">Agendar Gravação</a>
-                    <a href="{{ route('VideosController.gravarEcra') }}" class="menu-item">Gravar a Tela</a>
-                    <a href="{{ route('VideosController.gravarVideo') }}" class="menu-item">Gravar Videos</a>
-                    <a href="{{ route('VideosController.listarVideo') }}" class="menu-item">Listar Videos</a>
-                    <a href="{{ route('PlacasController.registarPalca') }}" class="menu-item">Registar Placa de Captação</a>
+                    <!--<a href="" class="menu-item">Agendar Gravação</a>-->
+                    <a href="{{ route('VideosController.gravarTv') }}" class="menu-item">Gravar Tv</a>
+                    <!--<a href="{{ route('VideosController.gravarVideo') }}" class="menu-item">Gravar Video</a>-->
+                    <a href="{{ route('VideosController.listarVideo') }}" class="menu-item">Listar Gravações</a>
+                   <!-- <a href="{{ route('PlacasController.registarPalca') }}" class="menu-item">Registar Placa de Captação</a>-->
+                    <a href="#" class="menu-item">Consultar</a>
+                </div>
+            </div>
+            <div class="nav-item has-sub">
+                <a href="#"><i class="ik ik-mic"></i><span>Rádio</span> </a>
+                <div class="submenu-content">
+                    <div class="submenu-content">
+                        <a href="#" class="menu-item">Gravar Emissora</a>
+                        <a href="#" class="menu-item">Lstar</a>
+                    </div>                    
                 </div>
             </div>
             <div class="nav-item has-sub">
                 <a href="#"><i class="ik ik-triangle"></i><span>Transcrição</span> </a>
                 <div class="submenu-content">
-                    <a href="pages/ui/modals.html" class="menu-item">Modals</a>
-                    <a href="pages/ui/range-slider.html" class="menu-item">Range Slider</a>
-                    <a href="pages/ui/rating.html" class="menu-item">Rating</a>
+                    <a href="#" class="menu-item">Realizar Transcrição</a>
+                    <a href="#" class="menu-item">Consultar</a>
                 </div>
             </div>
-            <!--
-            <div class="nav-item has-sub">
-                <a href="#"><i class="ik ik-package"></i><span>Extra</span></a>
-                <div class="submenu-content">
-                    <a href="pages/ui/session-timeout.html" class="menu-item">Session Timeout</a>
-                </div>
-            </div>-->
+         
             
-            <div class="nav-lavel">Extra</div>
+            <div class="nav-lavel">Acesso</div>
             <div class="nav-item has-sub">
-                <a href="#"><i class="ik ik-lock"></i><span>Utilizador</span></a>
+                <a href="#"><i class="ik ik-user"></i><span>Utilizador</span></a>
                 <div class="submenu-content">
                     <a href="{{ route('UsersController.criarConta') }}" class="menu-item">Criar Conta</a>
                     <a href="#" class="menu-item">Listar Contas</a>
@@ -157,7 +143,7 @@
             </div>
                         
                 <div class="nav-item">
-                    <a href="pages/layouts.html"><i class="ik ik-layout"></i><span>Historico</span></a>
+                    <!--<a href="pages/layouts.html"><i class="ik ik-layout"></i><span>Historico</span></a>-->
                 </div>
             </nav>
         </div>
@@ -176,7 +162,7 @@
         <footer class="footer">
             <div class="w-100 clearfix">
                 <span class="text-center text-sm-left d-md-inline-block">Copyright © 2020 v1.0 Todos Direitos Reservados.</span>
-                <span class="float-none float-sm-right mt-1 mt-sm-0 text-center">CIPRA<i class="fa fa-heart text-danger"></i> Multimedia</a></span>
+                <span class="float-none float-sm-right mt-1 mt-sm-0 text-center">CIPRA Multimedia</a></span>
             </div>
         </footer>
         
@@ -202,27 +188,21 @@
         <script src="../js/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
         <script src="../js/plugins/sweetalert/dist/sweetalert.min.js"></script>
         <script src="../js/plugins/summernote/dist/summernote-bs4.min.js"></script>
+        <script src="../js/plugins/datedropper/datedropper.min.js"></script>
+
+        <script src="../js/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
         <script src="../js/plugins/moment/moment.js"></script>
         <script src="../js/plugins/d3/dist/d3.min.js"></script>
         <script src="../js/plugins/c3/c3.min.js"></script>
         <script src="../js/theme.min.js"></script>
         <script src="../js/layouts.js"></script>
         <script src="../js/widgets.js"></script>
+        <script src="../js/alerts.js"></script>
 
         <script src="../js/record-rtc/RecordRTC.js"></script>
         <script src="../js/record-rtc/common.js"></script>
 
-       
 
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='https://www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-        </script>
+        
     </body>
 </html>

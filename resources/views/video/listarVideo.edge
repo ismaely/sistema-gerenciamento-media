@@ -2,110 +2,6 @@
 
 @section('master')
 
-<!--
-<div class="card">
-    <div class="card-header row">
-        <div class="col col-sm-3">
-           
-        </div>
-        <div class="col col-sm-6">
-            <div class="card-search with-adv-search dropdown">
-                <form action="">
-                    <input type="text" class="form-control global_filter" id="global_filter" placeholder="Search.." required>
-                    <button type="submit" class="btn btn-icon"><i class="ik ik-search"></i></button>
-                    <button type="button" id="adv_wrap_toggler" class="adv-btn ik ik-chevron-down dropdown-toggle" data-toggle="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                   
-                </form>
-            </div>
-        </div>
-        <div class="col col-sm-3">
-            <div class="card-options text-right">
-                <span class="mr-5" id="top">1 - 50 of 2,500</span>
-                <a href="#"><i class="ik ik-chevron-left"></i></a>
-                <a href="#"><i class="ik ik-chevron-right"></i></a>
-            </div>
-        </div>
-    </div>
-    <div class="card-block">
-        <div class="table-responsive">
-            <table class="table table-hover mb-0">
-                <thead>
-                    <tr>
-                        <th>Customer</th>
-                        <th>Company</th>
-                        <th>Lead Score</th>
-                        <th>Date</th>
-                        <th>Tags</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="d-inline-block align-middle">
-                                <img src="../img/users/4.jpg" alt="user image" class="rounded-circle img-40 align-top mr-15">
-                                <div class="d-inline-block">
-                                    <h6>Shirley  Hoe</h6>
-                                    <p class="text-muted mb-0">Sales executive , NY</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Pinterest</td>
-                        <td>223</td>
-                        <td>19-11-2018</td>
-                        <td>
-                            <label class="badge badge-primary">Sketch</label>
-                            <label class="badge badge-primary">Ui</label>
-                        </td>
-                        <td><a href="#!"><i class="ik ik-edit f-16 mr-15 text-green"></i></a><a href="#!"><i class="ik ik-trash-2 f-16 text-red"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="d-inline-block align-middle">
-                                <img src="../img/users/2.jpg" alt="user image" class="rounded-circle img-40 align-top mr-15">
-                                <div class="d-inline-block">
-                                    <h6>James Alexander</h6>
-                                    <p class="text-muted mb-0">Sales executive , EL</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Facebook</td>
-                        <td>268</td>
-                        <td>19-11-2018</td>
-                        <td>
-                            <label class="badge badge-primary">Ux</label>
-                            <label class="badge badge-danger">Ui</label>
-                        </td>
-                        <td><a href="#!"><i class="ik ik-edit f-16 mr-15 text-green"></i></a><a href="#!"><i class="ik ik-trash-2 f-16 text-red"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="d-inline-block align-middle">
-                                <img src="../img/users/4.jpg" alt="user image" class="rounded-circle img-40 align-top mr-15">
-                                <div class="d-inline-block">
-                                    <h6>Shirley  Hoe</h6>
-                                    <p class="text-muted mb-0">Sales executive , NY</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Twitter</td>
-                        <td>293</td>
-                        <td>16-03-2018</td>
-                        <td>
-                            <label class="badge badge-primary">Ui</label>
-                        </td>
-                        <td><a href="#!"><i class="ik ik-edit f-16 mr-15 text-green"></i></a><a href="#!"><i class="ik ik-trash-2 f-16 text-red"></i></a></td>
-                    </tr>
-                   
-                    
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
--->
-
-
 <div class="row">
     @if(flashMessages.has('msg'))
   <div class="col-md-12">
@@ -131,7 +27,7 @@
                     <a href="#" class="mr-1 view-thumb">
                         <i class="ik ik-list view-icon"></i>
                     </a>
-                    <a href="#" class="mr-1 view-grid">
+                    <a href="#" class="mr-1 view-grid" >
                         <i class="ik ik-grid view-icon"></i>
                     </a>
                 </span>
@@ -142,16 +38,19 @@
                             <i class="ik ik-chevron-down mr-0 align-middle"></i>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Nome</a>
-                            <a class="dropdown-item" href="#">Titulo</a>
-                            <a class="dropdown-item" href="#">Data</a>
+                            <a class="dropdown-item" href="#"  style="color:#000">Nome</a>
+                            <a class="dropdown-item" href="#"  style="color:#000">Titulo</a>
+                            <a class="dropdown-item" href="#"  style="color:#000">Data</a>
                         </div>
                     </div>
+                    <button class="btn btn-outline-dark btn-xs " type="button" data-toggle="modal" data-target="#fazerAgendamento">
+                        Por Data
+                        <i class="ik ik-chevron-down mr-0 align-middle"></i>
+                    </button>
                     <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
                         <form action="">
                             <input type="text" class="form-control" placeholder="Search.." required>
-                            <button type="submit" class="btn btn-icon"><i class="ik ik-search"></i></button>
-                           
+                            <button type="submit" class="btn btn-icon"><i class="ik ik-search"></i></button>   
                         </form>
                     </div>
                 </div>
@@ -162,80 +61,39 @@
                         <i class="ik ik-chevron-down mr-0 align-middle"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">10</a>
-                        <a class="dropdown-item" href="#">20</a>
-                        <a class="dropdown-item" href="#">30</a>
-                        <a class="dropdown-item" href="#">50</a>
-                        <a class="dropdown-item" href="#">100</a>
+                        <a class="dropdown-item" href="#"  style="color:#000">10</a>
+                        <a class="dropdown-item" href="#" style="color:#000">20</a>
+                        <a class="dropdown-item" href="#" style="color:#000">30</a>
+                        <a class="dropdown-item" href="#" style="color:#000">50</a>
+                        <a class="dropdown-item" href="#" style="color:#000">100</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="separator mb-20"></div>
-        @each(midia in arrayItem)
-
-        <div class="modal fade edit-layout-modal" id="editLayoutItem" tabindex="-1" role="dialog" aria-labelledby="editLayoutItemLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editLayoutItemLabel">Titulo: {{ midia.titulo }}<b> </b></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="lead"></p>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <video controls class="col-md-12">
-                                    <source src="../uploads/{{midia.nome}}"  type="video/mp4">
-                                </video>
-                                
-                                <!--<img src="../img/portfolio-1.jpg" class="img-fluid" alt="">-->
-                            </div>
-                        </div>
-                        <!--
-                        <div class="jumbotron pt-30 pb-30 mt-30">
-                            <h2 class="mt-0"></h2>
-                            <p class="lead"></p>
-                        </div>
-                    -->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a data-toggle="modal" data-target="#exampleModalCenter" data-dismiss="modal" class="btn btn-primary">Editar</a>
-                        <!--<button type="button" class="btn btn-danger list-delete">Delete</button>-->
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+        @each(midia in arrayItem)                        
         <div class="row layout-wrap" id="layout-wrap">
             <div class="col-12 list-item">
-                <div class="card d-flex flex-row mb-3">
+                <div class="card row d-flex flex-row mb-3">
                     <a class="d-flex card-img" href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem">
-                        <img src="../img/portfolio-1.jpg" alt="Donec sit amet est at sem iaculis aliquam." class="list-thumbnail responsive border-0">
-                        <span class="badge badge-pill badge-primary position-absolute badge-top-left">New</span>
-                        <span class="badge badge-pill badge-secondary position-absolute badge-top-left-2">Trending</span>
+                        <video controls class="col-md-12" alt="Donec sit amet est at sem iaculis aliquam." class="list-thumbnail responsive border-0" onclick="video({{ midia.id }})">
+                            <span class="badge badge-pill badge-primary position-absolute badge-top-left">New</span>
+                            <span class="badge badge-pill badge-secondary position-absolute badge-top-left-2">Trending</span>
+                        </video>  
                     </a>
                     <div class="d-flex flex-grow-1 min-width-zero card-content">
                         <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
                             <a class="list-item-heading mb-1 truncate w-40 w-xs-100" href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem">
                                 {{ midia.titulo }}
                             </a>
-                            <p class="mb-1 text-muted text-small category w-15 w-xs-100"> </p>
-                            <p class="mb-1 text-muted text-small date w-15 w-xs-100"> {{ midia.createdAt }}</p>
-                            <!--
-                            <div class="w-15 w-xs-100">
-                                <span class="badge badge-pill badge-secondary">On Hold</span>
-                            </div>
-                           -->
+                            <p class="mb-1 text-muted text-small date w-25 w-xs-100"> {{ midia.createdAt.toFormat('dd - MMMM - y | HH:mm',{locale: "pt"}) }}</p>
                            <div class="w-15 w-xs-100">
                             <span class="badge badge-pill badge-secondary"></span>
                         </div>
                         </div>
                         <div class="list-actions">
-                            <a href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem"><i class="ik ik-eye"></i></a>
+                            <a href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem" onclick="video({{ midia.id }})"><i class="ik ik-eye"></i></a>
                             <a data-toggle="modal" data-target="#exampleModalCenter" data-dismiss="modal"q><i class="ik ik-edit-2"></i></a>
-                            <!--<a href="#" class="list-delete"><i class="ik ik-trash-2"></i></a>-->
                         </div>
                         <div class="custom-control custom-checkbox pl-1 align-self-center">
                             <label class="custom-control custom-checkbox mb-0">
@@ -246,18 +104,10 @@
                         
                     </div>
                 </div>
-            </div>
-            
+            </div>            
         </div>
-
-<!-- visualização do video -->
-
-
-        
-
-        <!-- Editar o titulo -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal fade" id="exampleModalCenter"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" >
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalCenterLabel">Editar o titulo do Video: {{ midia.titulo }}</h5>
@@ -266,32 +116,132 @@
                     <form class="forms-sample" action="{{ route('VideosController.editarVideo') }}" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                       <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo" required>
-                      
-                    </div>
-                    
+                    </div> 
                     <div style="display:none">
                     <input type="text" class="form-control" id="nome" name="nome"  value="{{ midia.nome }}">
                     <input type="text" class="form-control" id="idVideo" name="idVideo" value={{ midia.id }}>
-                    </div>
-                  
+                    </div>                  
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                      
                         <button type="submit" id="enviar" class="btn btn-primary" >Enviar</button>
-                       
                     </div>
                     </form>
                 </div>
             </div>
           </div>
-          
-        
         @endeach
+        <div class="modal fade edit-layout-modal" id="editLayoutItem" tabindex="-1" role="dialog" aria-labelledby="editLayoutItemLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editLayoutItemLabel"><b>Titulo</b>: <span id="nomeTitulo"> </span><b> </b></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="lead"></p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <video controls class="col-md-12"  id="visualizar">                         
+                                </video>                                
+                                <!--<img src="../img/portfolio-1.jpg" class="img-fluid" alt="">-->
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a data-toggle="modal" data-target="#exampleModalCenter" data-dismiss="modal" class="btn btn-primary">Editar</a>
+                        <!--<button type="button" class="btn btn-danger list-delete">Delete</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>        
     </div>
 </div>
+<div class="page-wrap">
+    <aside class="right-sidebar">
+        <div class="sidebar-chat" data-plugin="chat-sidebar">            
+                <form class="mr-t-10">
+                    <div class="form-group">                      
+                    </div>
+                </form>            
+        </div>
+    </aside>
+    <div class="chat-panel" hidden>
+        <div class="card">
+             <div class="card-body">
+                <div class="widget-chat-activity flex-1">
+                    <div class="messages">
+                        <div class="message media reply">                       
+                     </div> 
+                    </div>
+                </div>
+            </div>           
+        </div>
+    </div>   
+</div>
+
+
+
+
+<div class="modal fade" id="fazerAgendamento" tabindex="-1" role="dialog" aria-labelledby="fazerAgendamento" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterLabel">Consultar por Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="exampleInputUsername1">Data de Inicio</label>
+                <input type="date" class="form-control" id="dataGravacao" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputUsername1">Data de Fim</label>
+                <input type="date" class="form-control" id="dataFim" placeholder="">
+              </div>
+  
+             
+            </div>
+           
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              
+                <button type="submit" id="salvarAgendamento" class="btn btn-primary" >Salvar</button>
+               
+            </div>
+        </div>
+    </div>
+  </div>
+  
+
+
+
+
 <script>
 
-    
+async function video(id){
+
+    var nomeTitulo = document.getElementById('nomeTitulo')
+    var visualizar = document.getElementById('visualizar')
+
+    const resp = await fetch("/visualizar/video",{
+        method: 'POST',
+        body: JSON.stringify({
+            id:id
+        }),
+        headers:{
+            "Content-Type":"application/json; charset=UTF-8"
+        }
+    });
+   const dados = await resp.json()
+   console.log(dados.titulo)
+   console.log(dados.nome)
+   nomeTitulo.innerText =`${dados.titulo}`
+   visualizar.innerHTML = `<source src="../uploads/${dados.nome}"  type="video/mp4">`
+   
+
+}
+
 </script>
 
 

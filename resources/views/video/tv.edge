@@ -1,0 +1,500 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>CIPRA - Multimedia</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+        
+        <link rel="stylesheet" href="../css/plugins/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="../css/plugins/icon-kit/dist/css/iconkit.min.css">
+        <link rel="stylesheet" href="../css/plugins/ionicons/dist/css/ionicons.min.css">
+        <link rel="stylesheet" href="../css/plugins/perfect-scrollbar/css/perfect-scrollbar.css">
+        <link rel="stylesheet" href="../css/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="../css/plugins/jvectormap/jquery-jvectormap.css">
+        <link rel="stylesheet" href="../css/plugins/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css">
+        <link rel="stylesheet" href="../css/plugins/weather-icons/css/weather-icons.min.css">
+        <link rel="stylesheet" href="../css/plugins/c3/c3.min.css">
+        <link rel="stylesheet" href="../css/plugins/owl.carousel/dist/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="../css/plugins/jquery-toast-plugin/dist/jquery.toast.min.css">
+        <link rel="stylesheet" href="../css/plugins/owl.carousel/dist/assets/owl.theme.default.min.css">
+        <link rel="stylesheet" href="../css/theme.min.css">
+        <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="wrapper nav-collapsed menu-collapsed" >
+            <header class="header-top" header-theme="light" style="background-image: url('../img/auth/back_image.jpg'); background-size: 1400px " >
+                <div class="container-fluid" >
+                    <div class="d-flex justify-content-between"  >
+                        <div class="top-menu d-flex align-items-center" >
+                            <button type="button" class="btn-icon mobile-nav-toggle d-lg-none"><span></span></button>
+                            <br> <br>
+        
+                            <button type="button" id="navbar-fullscreen" class="nav-link"><i class="ik ik-maximize"></i></button>
+                        </div>
+                        <div class="top-menu d-flex align-items-center">
+                            <div class="dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="notiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ik ik-bell"></i><span class="badge bg-danger"></span></a>
+                                <div class="dropdown-menu dropdown-menu-right notification-dropdown" aria-labelledby="notiDropdown">
+                                    <h4 class="header">Notificações</h4>
+                                    <div class="notifications-wrap">
+                                        <a href="#" class="media">
+                                            <span class="d-flex">
+                                                <i class="ik ik-check"></i> 
+                                            </span>
+                                            <span class="media-body">
+                                                <span class="heading-font-family media-heading">Agendado</span> 
+                                                <span class="media-content">Em espera ...</span>
+                                            </span>
+                                        </a>
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                           
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="avatar" src="../img/user.png" alt=""></a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="profile.html" style="color:#9aa0ac;"><i class="ik ik-user dropdown-icon"></i>Perfil</a>
+                                    <a class="dropdown-item" href="#" style="color:#9aa0ac;"><i class="ik ik-settings dropdown-icon"></i>Configurações</a>
+                                    <a class="dropdown-item" href="/logout/user" style="color:#9aa0ac;"><i class="ik ik-power dropdown-icon"></i>Sair</a>
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                </div>
+            </header>
+        
+            <div class="page-wrap">
+                <div class="app-sidebar colored" >
+                    <div class="sidebar-header" >
+                            <div class="logo-img">
+                                
+                                <a href="{{ route('HomeController.home') }}"><img src="/img/auth/logo.svg" width="170px" class="header-brand-img" alt="lavalite"> </a>
+                            </div>
+                        
+                        <button type="button" class="nav-toggle"><i data-toggle="expanded" class="ik ik-toggle-right toggle-icon"></i></button>
+                        <button id="sidebarClose" class="nav-close"><i class="ik ik-x"></i></button>
+                    </div>
+                    
+        <div class="sidebar-content">
+            <div class="nav-container">
+                <nav id="main-menu-navigation" class="navigation-main">
+                    <div class="nav-lavel">Menu</div>
+                    <div class="nav-item active">
+                        <a href="{{ route('HomeController.home') }}"><i class="ik ik-bar-chart-2"></i><span>Inicio</span></a>
+                    </div>
+                    
+                    
+                    <div class="nav-item has-sub">
+                        <a href="#"><i class="ik ik-box"></i><span>Televisão</span></a>
+                        <div class="submenu-content">
+                            
+                            <!--<a href="" class="menu-item">Agendar Gravação</a>-->
+                            <a href="{{ route('VideosController.gravarTv') }}" class="menu-item">Gravar Tv</a>
+                            <!--<a href="{{ route('VideosController.gravarVideo') }}" class="menu-item">Gravar Video</a>-->
+                            <a href="{{ route('VideosController.listarVideo') }}" class="menu-item">Listar Gravações</a>
+                            <!--<a href="{{ route('PlacasController.registarPalca') }}" class="menu-item">Registar Placa de Captação</a>-->
+                            <a href="#" class="menu-item">Consultar</a>
+                        </div>
+                    </div>
+                    <div class="nav-item has-sub">
+                        <a href="#"><i class="ik ik-triangle"></i><span>Rádio</span> </a>
+                        <div class="submenu-content">
+                            <div class="submenu-content">
+                                <a href="#" class="menu-item">Gravar Emissora</a>
+                                <a href="#" class="menu-item">Lstar</a>
+                            </div>                    
+                        </div>
+                    </div>
+                    <div class="nav-item has-sub">
+                        <a href="#"><i class="ik ik-triangle"></i><span>Transcrição</span> </a>
+                        <div class="submenu-content">
+                            <a href="#" class="menu-item">Realizar Transcrição</a>
+                            <a href="#" class="menu-item">Consultar</a>
+                        </div>
+                    </div>
+                 
+                    
+                    <div class="nav-lavel">Acesso</div>
+                    <div class="nav-item has-sub">
+                        <a href="#"><i class="ik ik-lock"></i><span>Utilizador</span></a>
+                        <div class="submenu-content">
+                            <a href="{{ route('UsersController.criarConta') }}" class="menu-item">Criar Conta</a>
+                            <a href="#" class="menu-item">Listar Contas</a>
+                            <a href="#" class="menu-item">Atribuir Previlegios</a>
+                            <!-- <a href="{{ route('UsersController.formularioAlterarPassword') }}" class="menu-item">Alterar password</a>-->
+        
+                        </div>
+                    </div>
+                                
+                        <div class="nav-item">
+                            <!--<a href="pages/layouts.html"><i class="ik ik-layout"></i><span>Historico</span></a>-->
+                        </div>
+                    </nav>
+                </div>
+                    </div>
+                </div>
+
+                <style>
+                  video {
+                    margin-top: 60px;
+                    width: 240%;
+                    height: 1%;
+                    border-radius: 9px;
+                    margin-left: 50px;
+                    border: 1px solid black;
+                    background-color: #000;
+                  }
+                  
+                </style>
+                
+                <div class="row">
+                  @if(flashMessages.has('msg'))
+                  <div class="col-md-12">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <b>{{ flashMessages.get('msg') }}</b>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <i class="ik ik-x"></i>
+                  </button>
+                    </div>
+                  </div>
+                  @endif
+                    <div class="col-md-12">
+                        <div class="card" >
+                            <div class="card-body text-center">
+                                <div class="col-md-5">
+                                    <video id="gum"  playsinline autoplay ></video>
+                                </div>
+                               
+                            </div>
+                            <div class="p-4 border-top mt-2" style="background-color:#fff">
+                                <div class="row text-center">
+                                    <div class="col-sm-4">
+                                      <button id="record" class="btn btn-info" disabled>Gravar</button>
+                                        <!--<button id="start" class="btn btn-primary">Ligar a camera</button>-->
+                                    </div>
+                
+                                    <div class="col-sm-4 ">
+                                      <button id="download" class="btn  btn-success" data-toggle="modal" data-target="#exampleModalCenter" disabled>Guardar</button> 
+                                  </div>
+                                    <div class="col-sm-4">
+                                       <!-- <button id="play"  class="btn btn-danger" disabled>Play</button>-->
+                                       <button id="agendamento" class="btn primary " data-toggle="modal" data-target="#fazerAgendamento" >Fazer Agendamento</button> 
+                                       
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                
+                        </div>
+                    </div>
+                
+                </div>
+
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalCenterLabel">Titulo do Video </h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          </div>
+                          <form class="forms-sample" action="{{ route('VideosController.salvarVideo') }}" method="POST" enctype="multipart/form-data">
+                          <div class="modal-body">
+                            <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo" required>
+                            
+                          </div>
+                          <!--
+                          <div style="display:none">
+                            <input type="file" class="form-control" id="video" name="video" >
+                          </div>
+                        -->
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            
+                              <button type="button" id="enviar" class="btn btn-primary" >Enviar</button>
+                             
+                          </div>
+                          </form>
+                      </div>
+                  </div>
+                </div> 
+                
+<div class="modal fade" id="fazerAgendamento" tabindex="-1" role="dialog" aria-labelledby="fazerAgendamento" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterLabel">Agendar gravação</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="exampleInputUsername1">Data de Gravação</label>
+              <input type="date" class="form-control" id="dataGravacao" placeholder="Data de grvação">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputUsername1">Hora de Inicio</label>
+              <input type="time" class="form-control" id="hoaraInicio" placeholder="Hora de Inicio">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleIn">Hora de Fim</label>
+              <input type="time" class="form-control" id="horaFim" placeholder="Hora de Fim">
+            </div>
+            
+            <div class="form-group">
+              <label for="exampleIn">Titulo</label>
+              <input type="text" class="form-control" id="titulo" placeholder="titulo">
+            </div>
+            
+          </div>
+         
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            
+              <button type="submit" id="salvarAgendamento" class="btn btn-primary" >Salvar</button>
+             
+          </div>
+      </div>
+  </div>
+</div>
+
+                
+                <footer class="footer">
+                    <div class="w-100 clearfix">
+                        <span class="text-center text-sm-left d-md-inline-block">Copyright © 2020 v1.0 Todos Direitos Reservados.</span>
+                        <span class="float-none float-sm-right mt-1 mt-sm-0 text-center">CIPRA Multimedia</a></span>
+                    </div>
+                </footer>
+                
+            </div>
+        </div>
+ 
+
+<script>
+
+let mediaRecorder;
+let recordedBlobs;
+
+const errorMsgElement = document.querySelector('span#errorMsg');
+//const recordedVideo = document.querySelector('video#recorded');
+const recordButton = document.querySelector('button#record');
+//const playButton = document.querySelector('button#play');
+const downloadButton = document.querySelector('button#download');
+
+const enviarButton = document.querySelector('button#enviar');
+const salvarAgendamento = document.querySelector('button#salvarAgendamento');
+
+
+
+/**
+document.querySelector('button#start').addEventListener('click', async () => {
+  const constraints = {
+    audio: true,
+    video: {
+      facingMode: "user",
+            width: {min: 640, ideal: 1000, max: 1220},
+            height: {min: 480, ideal: 500, max: 1080}
+    }
+  };
+  await init(constraints);
+});
+*/
+
+
+async function init() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(
+      {
+    audio: true,
+    video: {
+      facingMode: "user",
+            width: {min: 640, ideal: 1000, max: 1220},
+            height: {min: 480, ideal: 500, max: 1080}
+    }
+  }
+    );
+    handleSuccess(stream);
+  } catch (e) {
+    console.error('navigator.getUserMedia error:', e);
+    //errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+  }
+}
+
+function handleSuccess(stream) {
+  recordButton.disabled = false;
+  window.stream = stream;
+
+  const gumVideo = document.querySelector('video#gum');
+  gumVideo.srcObject = stream;
+}
+
+init()
+
+recordButton.addEventListener('click', () => {
+  if (recordButton.textContent === 'Gravar') {
+    startRecording();
+  } else {
+    stopRecording();
+    recordButton.textContent = 'Gravar';
+    //playButton.disabled = false;
+    downloadButton.disabled = false;
+  }
+});
+
+
+function startRecording() {
+  recordedBlobs = [];
+  let options = {mimeType: 'video/webm;codecs=vp9,opus'};
+  try {
+    mediaRecorder = new MediaRecorder(window.stream, options);
+  } catch (e) {
+    console.error('Exception while creating MediaRecorder:', e);
+    errorMsgElement.innerHTML = `Exception while creating MediaRecorder: ${JSON.stringify(e)}`;
+    return;
+  }
+
+  recordButton.textContent = 'Stop Gravação';
+  //playButton.disabled = true;
+  downloadButton.disabled = true;
+  mediaRecorder.onstop = (event) => {
+    //console.log('Recorder stopped: ', event);
+  };
+  mediaRecorder.ondataavailable = handleDataAvailable;
+  mediaRecorder.start();
+}
+
+function handleDataAvailable(event) {
+  if (event.data && event.data.size > 0) {
+    recordedBlobs.push(event.data);
+  }
+}
+
+function stopRecording() {
+  console.log(mediaRecorder.resume());
+  mediaRecorder.stop();
+ 
+}
+
+
+
+downloadButton.addEventListener('click', () => {
+  const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
+  //const url = window.URL.createObjectURL(blob);
+});
+
+
+salvarAgendamento.addEventListener('click', () => {
+  const date = new Date;
+  const dataGravacao = $('#dataGravacao').val();
+  var horaInicio = $('#hoaraInicio').val();
+  var horaFim = $('#horaFim').val();
+
+   console.log(date.toTimeString().substr(0,5));
+
+
+  if(dataGravacao === date.toISOString().substr(0,10)){
+    var arrayDataInicio = horaInicio.split(":")
+    var arrayhoraFim = horaFim.split(":")
+    
+    console.log(horaInicio);
+    var TotalMinutosInicio = (arrayDataInicio[0] * 60) +  arrayDataInicio[1]
+    var TotalMinutosFim = (arrayhoraFim[0] * 60) +  arrayhoraFim[1]
+    total = TotalMinutosInicio + TotalMinutosFim
+
+   setTimeout(function() {
+    
+    console.log('pronto');
+
+
+   }, 1000);
+   
+
+    //showSuccessToast()
+  }
+
+
+});
+
+enviarButton.addEventListener('click', () => {
+  const date = new Date;
+  const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
+  const formData = new FormData();
+  const xhr = new XMLHttpRequest();
+
+  const name = $('#titulo').val();
+  const titulo = name+'.mp4';
+
+  const fileVideo = new File([blob], titulo, {type: 'video/mp4'});
+
+  formData.append('video-blob', fileVideo);
+  formData.append('video-filename', fileVideo.name);
+  formData.append('titulo', name);
+  formData.append('upload', 'true');
+
+  
+  xhr.open('POST', '/salvar/video');
+  xhr.send(formData);
+  showSuccessToast()
+  //xhr.onload = function(){ console.log(this.response); };
+  
+
+});
+</script>
+
+
+        <script src="../js/vendor/jquery-3.3.1.min.js"></script>
+        <script src="../js/plugins/popper.js/dist/umd/popper.min.js"></script>
+        <script src="../js/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../js/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+
+       
+
+        <script src="../js/plugins/screenfull/dist/screenfull.js"></script>
+        <script src="../js/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="../js/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="../js/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+
+        <script src="../js/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
+        <script src="../js/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+        <script src="../js/plugins/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="../js/plugins/summernote/dist/summernote-bs4.min.js"></script>
+        <script src="../js/plugins/moment/moment.js"></script>
+        <script src="../js/plugins/d3/dist/d3.min.js"></script>
+        <script src="../js/plugins/c3/c3.min.js"></script>
+        <script src="../js/theme.min.js"></script>
+        <script src="../js/layouts.js"></script>
+        <script src="../js/widgets.js"></script>
+
+        <script src="../js/alerts.js"></script>
+        <script src="../js/record-rtc/RecordRTC.js"></script>
+        <script src="../js/record-rtc/common.js"></script>
+        <script src="../js/record-rtc/DetectRTC.js"></script>
+
+       
+
+
+
+</div>
+</div>
+
+   
+</div>
+</div>
+    </body>
+</html>
