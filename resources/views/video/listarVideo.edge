@@ -123,7 +123,7 @@
                     </div>                  
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" id="enviar" class="btn btn-primary" >Enviar</button>
+                        <button type="submit" id="enviar" class="btn btn-primary" data-dismiss="modal">Enviar</button>
                     </div>
                     </form>
                 </div>
@@ -181,8 +181,6 @@
 </div>
 
 
-
-
 <div class="modal fade" id="fazerAgendamento" tabindex="-1" role="dialog" aria-labelledby="fazerAgendamento" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -206,7 +204,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
               
-                <button type="submit" id="salvarAgendamento" class="btn btn-primary" >Salvar</button>
+                <button type="submit" id="salvarAgendamento" class="btn btn-primary" data-dismiss="modal">Salvar</button>
                
             </div>
         </div>
@@ -238,7 +236,6 @@ async function video(id){
    console.log(dados.nome)
    nomeTitulo.innerText =`${dados.titulo}`
    visualizar.innerHTML = `<source src="../uploads/${dados.nome}"  type="video/mp4">`
-   
 
 }
 

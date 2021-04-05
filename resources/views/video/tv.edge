@@ -226,7 +226,7 @@
                           <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                             
-                              <button type="button" id="enviar" class="btn btn-primary" >Enviar</button>
+                              <button type="button" id="enviar" class="btn btn-primary" data-dismiss="modal">Enviar</button>
                              
                           </div>
                           </form>
@@ -267,20 +267,19 @@
           <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
             
-              <button type="submit" id="salvarAgendamento" class="btn btn-primary" >Salvar</button>
+              <button type="submit" id="salvarAgendamento" class="btn btn-primary">Salvar</button>
              
           </div>
       </div>
   </div>
 </div>
-
                 
-                <footer class="footer">
-                    <div class="w-100 clearfix">
-                        <span class="text-center text-sm-left d-md-inline-block">Copyright © 2020 v1.0 Todos Direitos Reservados.</span>
-                        <span class="float-none float-sm-right mt-1 mt-sm-0 text-center">CIPRA Multimedia</a></span>
-                    </div>
-                </footer>
+          <footer class="footer">
+              <div class="w-100 clearfix">
+                  <span class="text-center text-sm-left d-md-inline-block">Copyright © 2020 v1.0 Todos Direitos Reservados.</span>
+                  <span class="float-none float-sm-right mt-1 mt-sm-0 text-center">CIPRA Multimedia</a></span>
+              </div>
+          </footer>
                 
             </div>
         </div>
@@ -299,7 +298,6 @@ const downloadButton = document.querySelector('button#download');
 
 const enviarButton = document.querySelector('button#enviar');
 const salvarAgendamento = document.querySelector('button#salvarAgendamento');
-
 
 
 /**
@@ -417,13 +415,12 @@ salvarAgendamento.addEventListener('click', () => {
     var TotalMinutosFim = (arrayhoraFim[0] * 60) +  arrayhoraFim[1]
     total = TotalMinutosInicio + TotalMinutosFim
 
-   setTimeout(function() {
+    false && setTimeout(function() {
     
-    console.log('pronto');
+    console.log('pronto')();
 
-
-   }, 1000);
-   
+   }, 400);
+  
 
     //showSuccessToast()
   }
@@ -431,6 +428,7 @@ salvarAgendamento.addEventListener('click', () => {
 
 });
 
+// função que vai enviar o video no backend para ser salvo
 enviarButton.addEventListener('click', () => {
   const date = new Date;
   const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
@@ -457,34 +455,31 @@ enviarButton.addEventListener('click', () => {
 });
 </script>
 
+    <script src="../js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="../js/plugins/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../js/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../js/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
 
-        <script src="../js/vendor/jquery-3.3.1.min.js"></script>
-        <script src="../js/plugins/popper.js/dist/umd/popper.min.js"></script>
-        <script src="../js/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="../js/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+    <script src="../js/plugins/screenfull/dist/screenfull.js"></script>
+    <script src="../js/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../js/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../js/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 
-       
+    <script src="../js/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
+    <script src="../js/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="../js/plugins/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../js/plugins/summernote/dist/summernote-bs4.min.js"></script>
+    <script src="../js/plugins/moment/moment.js"></script>
+    <script src="../js/plugins/d3/dist/d3.min.js"></script>
+    <script src="../js/plugins/c3/c3.min.js"></script>
+    <script src="../js/theme.min.js"></script>
+    <script src="../js/layouts.js"></script>
+    <script src="../js/widgets.js"></script>
 
-        <script src="../js/plugins/screenfull/dist/screenfull.js"></script>
-        <script src="../js/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="../js/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <script src="../js/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-
-        <script src="../js/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
-        <script src="../js/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-        <script src="../js/plugins/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="../js/plugins/summernote/dist/summernote-bs4.min.js"></script>
-        <script src="../js/plugins/moment/moment.js"></script>
-        <script src="../js/plugins/d3/dist/d3.min.js"></script>
-        <script src="../js/plugins/c3/c3.min.js"></script>
-        <script src="../js/theme.min.js"></script>
-        <script src="../js/layouts.js"></script>
-        <script src="../js/widgets.js"></script>
-
-        <script src="../js/alerts.js"></script>
-        <script src="../js/record-rtc/RecordRTC.js"></script>
-        <script src="../js/record-rtc/common.js"></script>
-        <script src="../js/record-rtc/DetectRTC.js"></script>
+    <script src="../js/alerts.js"></script>
+    <script src="../js/record-rtc/RecordRTC.js"></script>
+    <script src="../js/record-rtc/common.js"></script>
+    <script src="../js/record-rtc/DetectRTC.js"></script>
 
        
 

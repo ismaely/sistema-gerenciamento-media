@@ -143,9 +143,6 @@ const salvarAgendamento = document.querySelector('button#salvarAgendamento');
 
 
 
-
-
-
 /**
 document.querySelector('button#start').addEventListener('click', async () => {
   const constraints = {
@@ -236,38 +233,31 @@ function stopRecording() {
 }
 
 
-
-
 downloadButton.addEventListener('click', () => {
   const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
   //const url = window.URL.createObjectURL(blob);
 });
 
+
+// agendamento da televisão
 salvarAgendamento.addEventListener('click', () => {
   const date = new Date;
   const dataGravacao = $('#dataGravacao').val();
   var horaInicio = $('#hoaraInicio').val();
   var horaFim = $('#horaFim').val();
-
-  
   
   if(dataGravacao === date.toISOString().substr(0,10)){
     var arrayDataInicio = horaInicio.split(":")
     var arrayhoraFim = horaFim.split(":")
     
-    var TotalMinutosInicio = (arrayDataInicio[0] * 60) +  arrayDataInicio[1]
+    var TotalMinutosInicio = (arrayDataInicio[0] * 60) + arrayDataInicio[1]
     //TotalMinutosInicio = TotalMinutosInicio + arrayDataInicio[1]
 
     console.log(TotalMinutosInicio);
 
-
     showSuccessToast()
     console.log('sucesso');
   }
-
-
-
-
   
 
 });
